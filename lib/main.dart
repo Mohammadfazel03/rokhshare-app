@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:rokhshare/config/dependency_injection.dart';
 import 'package:rokhshare/config/theme/theme_cubit.dart';
 
 import 'config/theme/themes.dart';
 import 'feature/main/presentation/main_page.dart';
 
-void main() {
+Future<void> main() async {
+  await setup();
   runApp(const MyApp());
 }
 
