@@ -10,8 +10,14 @@
 class FontFamily {
   FontFamily._();
 
+  /// Font family: dana
+  static const String dana = 'dana';
+
   /// Font family: iran-sans
   static const String iranSans = 'iran-sans';
+
+  /// Font family: iran-sans-mobile
+  static const String iranSansMobile = 'iran-sans-mobile';
 
   /// Font family: iran-yekan
   static const String iranYekan = 'iran-yekan';

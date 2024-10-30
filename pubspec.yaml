@@ -47,6 +47,10 @@ dependencies:
   vector_graphics_compiler: ^1.1.11+1
   vector_graphics: ^1.1.11+1
   carousel_slider: ^5.0.0
+  async: ^2.11.0
+  equatable: ^2.0.5
+  flutter_spinkit: ^5.2.1
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:
@@ -97,6 +101,14 @@ flutter:
     - family: iran-yekan
       fonts:
         - asset: assets/fonts/BYekan.ttf
+          style: normal
+    - family: dana
+      fonts:
+        - asset: assets/fonts/dana_regular.ttf
+          style: normal
+    - family: iran-sans-mobile
+      fonts:
+        - asset: assets/fonts/SansMobile.ttf
           style: normal
 
   # For details regarding fonts from package dependencies,

@@ -15,6 +15,14 @@ import 'package:vector_graphics/vector_graphics.dart' as _vg;
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/arrow_left_linear.svg
+  SvgGenImage get arrowLeftLinear =>
+      const SvgGenImage('assets/icons/arrow_left_linear.svg');
+
+  /// File path: assets/icons/arrow_right_linear.svg
+  SvgGenImage get arrowRightLinear =>
+      const SvgGenImage('assets/icons/arrow_right_linear.svg');
+
   /// File path: assets/icons/category_outline.svg
   SvgGenImage get categoryOutline =>
       const SvgGenImage('assets/icons/category_outline.svg');
@@ -22,6 +30,18 @@ class $AssetsIconsGen {
   /// File path: assets/icons/category_sharp.svg
   SvgGenImage get categorySharp =>
       const SvgGenImage('assets/icons/category_sharp.svg');
+
+  /// File path: assets/icons/image_broken.svg
+  SvgGenImage get imageBroken =>
+      const SvgGenImage('assets/icons/image_broken.svg');
+
+  /// File path: assets/icons/reel_linear.svg
+  SvgGenImage get reelLinear =>
+      const SvgGenImage('assets/icons/reel_linear.svg');
+
+  /// File path: assets/icons/restart_linear.svg
+  SvgGenImage get restartLinear =>
+      const SvgGenImage('assets/icons/restart_linear.svg');
 
   /// File path: assets/icons/rounded_magnifer_outline.svg
   SvgGenImage get roundedMagniferOutline =>
@@ -50,29 +70,42 @@ class $AssetsIconsGen {
   SvgGenImage get videoFrameSharp =>
       const SvgGenImage('assets/icons/video_frame_sharp.svg');
 
+  /// File path: assets/icons/wifi_low_bound.svg
+  SvgGenImage get wifiLowBound =>
+      const SvgGenImage('assets/icons/wifi_low_bound.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
+        arrowLeftLinear,
+        arrowRightLinear,
         categoryOutline,
         categorySharp,
+        imageBroken,
+        reelLinear,
+        restartLinear,
         roundedMagniferOutline,
         roundedMagniferSharp,
         userOutline,
         userRoundedOutline,
         userSharp,
         videoFrameOutline,
-        videoFrameSharp
+        videoFrameSharp,
+        wifiLowBound
       ];
 }
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/test.png
+  AssetGenImage get test => const AssetGenImage('assets/images/test.png');
+
   /// File path: assets/images/walking_dead.jpg
   AssetGenImage get walkingDead =>
       const AssetGenImage('assets/images/walking_dead.jpg');
 
   /// List of all assets
-  List<AssetGenImage> get values => [walkingDead];
+  List<AssetGenImage> get values => [test, walkingDead];
 }
 
 class Assets {
