@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rokhshare/config/dependency_injection.dart';
+import 'package:rokhshare/feature/category/presentation/bloc/category_cubit.dart';
 import 'package:rokhshare/feature/category/presentation/category_page.dart';
 import 'package:rokhshare/feature/home/presentation/bloc/home_cubit.dart';
 import 'package:rokhshare/feature/home/presentation/home_page.dart';
@@ -34,8 +35,9 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
+          BlocProvider(create: (context) => HomeCubit(repository: getIt.get())),
           BlocProvider(
-              create: (context) => HomeCubit(repository: getIt.get()))
+              create: (context) => CategoryCubit(repository: getIt.get()))
         ],
         child: Scaffold(
           bottomNavigationBar: MainBottomNavigationBar(controller: _controller),

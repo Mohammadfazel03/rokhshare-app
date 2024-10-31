@@ -1,0 +1,83 @@
+import 'dart:ui';
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:rokhshare/feature/home/data/remote/model/genre.dart';
+import 'package:rokhshare/gen/fonts.gen.dart';
+
+class GenreItemWidget extends StatefulWidget {
+  final Genre genre;
+
+  const GenreItemWidget({super.key, required this.genre});
+
+  @override
+  State<GenreItemWidget> createState() => _GenreItemWidgetState();
+}
+
+class _GenreItemWidgetState extends State<GenreItemWidget> {
+  double scale = 1.0;
+
+  void _changeScaleDown() {
+    setState(() => scale = 0.9);
+  }
+
+  void _changeScaleUp() {
+    setState(() => scale = 1);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTapDown: (_) {
+        _changeScaleDown();
+      },
+      onTapUp: (_) {
+        _changeScaleUp();
+      },
+      onTapCancel: () {
+        _changeScaleUp();
+      },
+      child: AnimatedScale(
+        scale: scale,
+        duration: const Duration(milliseconds: 200),
+        child: Container(
+          clipBehavior: Clip.hardEdge,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: CachedNetworkImageProvider(widget.genre.poster ?? ""))),
+          child: Stack(
+            children: [
+              Positioned.fill(
+                  child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 0.5, sigmaY: 0.5),
+                      child: DecoratedBox(
+                          decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.4))))),
+              // Positioned.fill(
+              //     child: ),
+              Center(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                  child: Text(widget.genre.title ?? "",
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: FontFamily.dana
+                      )),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
