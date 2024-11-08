@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rokhshare/feature/home/presentation/bloc/home_cubit.dart';
 import 'package:rokhshare/feature/home/presentation/widgets/app_bar/home_slider.dart';
 import 'package:rokhshare/feature/home/presentation/widgets/collection_slider_widget/collection_slider_widget.dart';
-import 'package:rokhshare/gen/assets.gen.dart';
+import 'package:rokhshare/utils/error_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -76,35 +76,19 @@ class _HomePageState extends State<HomePage>
                                   ),
                                 );
                               } else {
-                                return Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(16),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(state.error?.error ?? ""),
-                                        TextButton.icon(
-                                            onPressed: () {
-                                              int page =
-                                                  BlocProvider.of<HomeCubit>(
-                                                          context)
-                                                      .state
-                                                      .nextPage;
-                                              BlocProvider.of<HomeCubit>(
-                                                      context)
-                                                  .getHome(
-                                                      page: page, retry: true);
-                                            },
-                                            label: const Text("تلاش دوباره"),
-                                            icon: const Icon(Icons.refresh))
-                                      ],
-                                    ),
-                                  ),
-                                );
+                                return CustomErrorWidget(
+                                    error: state.error!,
+                                    showIcon: false,
+                                    showMessage: true,
+                                    showTitle: false,
+                                    onRetry: () {
+                                      int page =
+                                          BlocProvider.of<HomeCubit>(context)
+                                              .state
+                                              .nextPage;
+                                      BlocProvider.of<HomeCubit>(context)
+                                          .getHome(page: page, retry: true);
+                                    });
                               }
                             }
                             return CollectionSliderWidget(
@@ -121,34 +105,13 @@ class _HomePageState extends State<HomePage>
                 ],
               );
             } else if (state.status == HomeStatus.error) {
-              return Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Assets.icons.wifiLowBound.svg(
-                        width: 128,
-                        height: 128,
-                        color: Theme.of(context).colorScheme.primary),
-                    const SizedBox(height: 8),
-                    Text(state.error?.title ?? "عدم دسترسی به اینترنت"),
-                    const SizedBox(height: 4),
-                    Text(state.error?.error ??
-                        "لطفا از اتصال اینترنت خود اطمینان حاصل کنید."),
-                    TextButton.icon(
-                        onPressed: () {
-                          BlocProvider.of<HomeCubit>(context)
-                              .getHome(retry: true);
-                        },
-                        label: const Text("تلاش دوباره"),
-                        icon: Assets.icons.restartLinear.svg(
-                            color: Theme.of(context).colorScheme.primary,
-                            height: 24,
-                            width: 24))
-                  ],
-                ),
-              );
+              return CustomErrorWidget(
+                  error: state.error!,
+                  showIcon: true,
+                  showTitle: true,
+                  onRetry: () {
+                    BlocProvider.of<HomeCubit>(context).getHome(retry: true);
+                  });
             } else {
               return const Center(child: CircularProgressIndicator.adaptive());
             }

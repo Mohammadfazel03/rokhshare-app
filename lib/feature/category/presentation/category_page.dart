@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rokhshare/feature/category/presentation/bloc/category_cubit.dart';
 import 'package:rokhshare/feature/category/presentation/widget/genre_item_widget.dart';
-import 'package:rokhshare/gen/assets.gen.dart';
+import 'package:rokhshare/utils/error_widget.dart';
 
 class CategoryPage extends StatefulWidget {
   const CategoryPage({super.key});
@@ -52,40 +52,20 @@ class _CategoryPageState extends State<CategoryPage> {
               return const Center(child: CircularProgressIndicator.adaptive());
             } else if (state.status == CategoryStatus.error &&
                 state.genres.isEmpty) {
-              return Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Assets.icons.wifiLowBound.svg(
-                        width: 128,
-                        height: 128,
-                        color: Theme.of(context).colorScheme.primary),
-                    const SizedBox(height: 8),
-                    Text(state.error?.title ?? "عدم دسترسی به اینترنت"),
-                    const SizedBox(height: 4),
-                    Text(state.error?.error ??
-                        "لطفا از اتصال اینترنت خود اطمینان حاصل کنید."),
-                    TextButton.icon(
-                        onPressed: () {
-                          BlocProvider.of<CategoryCubit>(context)
-                              .getCategories(retry: true);
-                        },
-                        label: const Text("تلاش دوباره"),
-                        icon: Assets.icons.restartLinear.svg(
-                            color: Theme.of(context).colorScheme.primary,
-                            height: 24,
-                            width: 24))
-                  ],
-                ),
-              );
+              return CustomErrorWidget(
+                  error: state.error!,
+                  showIcon: true,
+                  showTitle: true,
+                  onRetry: () {
+                    BlocProvider.of<CategoryCubit>(context)
+                        .getCategories(retry: true);
+                  });
             }
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: GridView.builder(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 8,
                     crossAxisSpacing: 8,
@@ -106,31 +86,18 @@ class _CategoryPageState extends State<CategoryPage> {
                           ),
                         );
                       } else {
-                        return Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(state.error?.error ?? ""),
-                                TextButton.icon(
-                                    onPressed: () {
-                                      int page = BlocProvider.of<CategoryCubit>(
-                                              context)
-                                          .state
-                                          .nextPage;
-                                      BlocProvider.of<CategoryCubit>(context)
-                                          .getCategories(
-                                              page: page, retry: true);
-                                    },
-                                    label: const Text("تلاش دوباره"),
-                                    icon: const Icon(Icons.refresh))
-                              ],
-                            ),
-                          ),
-                        );
+                        return CustomErrorWidget(
+                            error: state.error!,
+                            showIcon: false,
+                            showMessage: true,
+                            showTitle: false,
+                            onRetry: () {
+                              int page = BlocProvider.of<CategoryCubit>(context)
+                                  .state
+                                  .nextPage;
+                              BlocProvider.of<CategoryCubit>(context)
+                                  .getCategories(page: page, retry: true);
+                            });
                       }
                     }
                     return GenreItemWidget(genre: state.genres[index]);
