@@ -6,6 +6,9 @@ import 'package:rokhshare/feature/category/data/repositories/home_repository_imp
 import 'package:rokhshare/feature/home/data/remote/home_api_service.dart';
 import 'package:rokhshare/feature/home/data/repositories/home_repository.dart';
 import 'package:rokhshare/feature/home/data/repositories/home_repository_impl.dart';
+import 'package:rokhshare/feature/search/data/remote/search_api_service.dart';
+import 'package:rokhshare/feature/search/data/repositories/search_repository.dart';
+import 'package:rokhshare/feature/search/data/repositories/search_repository_impl.dart';
 
 import 'dio_config.dart';
 
@@ -23,4 +26,9 @@ Future<void> setup() async {
       CategoryApiService(dio: getIt.get()));
   getIt.registerSingleton<CategoryRepository>(
       CategoryRepositoryImpl(apiService: getIt.get()));
+
+  getIt.registerSingleton<SearchApiService>(
+      SearchApiService(dio: getIt.get()));
+  getIt.registerSingleton<SearchRepository>(
+      SearchRepositoryImpl(apiService: getIt.get()));
 }
