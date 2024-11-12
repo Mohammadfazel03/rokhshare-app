@@ -31,9 +31,17 @@ class $AssetsIconsGen {
   SvgGenImage get categorySharp =>
       const SvgGenImage('assets/icons/category_sharp.svg');
 
+  /// File path: assets/icons/filter_bold.svg
+  SvgGenImage get filterBold =>
+      const SvgGenImage('assets/icons/filter_bold.svg');
+
   /// File path: assets/icons/image_broken.svg
   SvgGenImage get imageBroken =>
       const SvgGenImage('assets/icons/image_broken.svg');
+
+  /// File path: assets/icons/magnifer_linear.svg
+  SvgGenImage get magniferLinear =>
+      const SvgGenImage('assets/icons/magnifer_linear.svg');
 
   /// File path: assets/icons/reel_linear.svg
   SvgGenImage get reelLinear =>
@@ -80,7 +88,9 @@ class $AssetsIconsGen {
         arrowRightLinear,
         categoryOutline,
         categorySharp,
+        filterBold,
         imageBroken,
+        magniferLinear,
         reelLinear,
         restartLinear,
         roundedMagniferOutline,
