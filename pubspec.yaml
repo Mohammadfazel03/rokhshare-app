@@ -52,6 +52,7 @@ dependencies:
   flutter_spinkit: ^5.2.1
   cached_network_image: ^3.4.1
   flutter_animate: ^4.5.0
+  syncfusion_flutter_datepicker: ^27.2.2
 
 dev_dependencies:
   flutter_test:

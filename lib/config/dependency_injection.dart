@@ -10,6 +10,7 @@ import 'package:rokhshare/feature/search/data/remote/search_api_service.dart';
 import 'package:rokhshare/feature/search/data/repositories/search_repository.dart';
 import 'package:rokhshare/feature/search/data/repositories/search_repository_impl.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/country_filter_section_widget/bloc/country_filter_section_cubit.dart';
+import 'package:rokhshare/feature/search/presentation/widgets/date_filter_section_widget/bloc/date_filter_section_cubit.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/genre_filter_section_widget/bloc/genre_filter_section_cubit.dart';
 
 import 'dio_config.dart';
@@ -29,8 +30,7 @@ Future<void> setup() async {
   getIt.registerSingleton<CategoryRepository>(
       CategoryRepositoryImpl(apiService: getIt.get()));
 
-  getIt.registerSingleton<SearchApiService>(
-      SearchApiService(dio: getIt.get()));
+  getIt.registerSingleton<SearchApiService>(SearchApiService(dio: getIt.get()));
   getIt.registerSingleton<SearchRepository>(
       SearchRepositoryImpl(apiService: getIt.get()));
 
@@ -38,7 +38,9 @@ Future<void> setup() async {
   getIt.registerLazySingleton<GenreFilterSectionCubit>(
       () => GenreFilterSectionCubit(repository: getIt.get()));
 
-
   getIt.registerLazySingleton<CountryFilterSectionCubit>(
       () => CountryFilterSectionCubit(repository: getIt.get()));
+
+  getIt.registerLazySingleton<DateFilterSectionCubit>(
+      () => DateFilterSectionCubit());
 }

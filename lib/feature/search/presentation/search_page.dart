@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rokhshare/config/dependency_injection.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/country_filter_section_widget/bloc/country_filter_section_cubit.dart';
+import 'package:rokhshare/feature/search/presentation/widgets/date_filter_section_widget/bloc/date_filter_section_cubit.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/filter_section_widget/filter_section_widget.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/genre_filter_section_widget/bloc/genre_filter_section_cubit.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/search_field_widget.dart';
@@ -53,7 +54,9 @@ class _SearchPageState extends State<SearchPage>
                             BlocProvider.value(
                                 value: getIt.get<GenreFilterSectionCubit>()),
                             BlocProvider.value(
-                                value: getIt.get<CountryFilterSectionCubit>())
+                                value: getIt.get<CountryFilterSectionCubit>()),
+                            BlocProvider.value(
+                                value: getIt.get<DateFilterSectionCubit>())
                           ], child: const FilterSectionWidget());
                         },
                         isScrollControlled: true,
