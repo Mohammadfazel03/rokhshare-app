@@ -9,6 +9,7 @@ import 'package:rokhshare/feature/home/data/repositories/home_repository_impl.da
 import 'package:rokhshare/feature/search/data/remote/search_api_service.dart';
 import 'package:rokhshare/feature/search/data/repositories/search_repository.dart';
 import 'package:rokhshare/feature/search/data/repositories/search_repository_impl.dart';
+import 'package:rokhshare/feature/search/presentation/widgets/country_filter_section_widget/bloc/country_filter_section_cubit.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/genre_filter_section_widget/bloc/genre_filter_section_cubit.dart';
 
 import 'dio_config.dart';
@@ -36,4 +37,8 @@ Future<void> setup() async {
   // register bloc
   getIt.registerLazySingleton<GenreFilterSectionCubit>(
       () => GenreFilterSectionCubit(repository: getIt.get()));
+
+
+  getIt.registerLazySingleton<CountryFilterSectionCubit>(
+      () => CountryFilterSectionCubit(repository: getIt.get()));
 }

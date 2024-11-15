@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rokhshare/feature/search/presentation/widgets/country_filter_section_widget/country_filter_section_widget.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/genre_filter_section_widget/genre_filter_section_widget.dart';
 
 class FilterSectionWidget extends StatefulWidget {
@@ -33,6 +34,20 @@ class _FilterSectionWidgetState extends State<FilterSectionWidget> {
             title: const Text("ژانر ها"),
             maintainState: true,
             children: const [GenreFilterSectionWidget()],
+          ),
+          ExpansionTile(
+            collapsedShape: Border.symmetric(
+                horizontal: BorderSide(
+                  width: 0.5,
+                    color: Theme.of(context).colorScheme.outlineVariant)),
+            shape: Border.symmetric(
+                horizontal: BorderSide(
+                    width: 0.5,
+                    color: Theme.of(context).colorScheme.primary)),
+            dense: true,
+            title: const Text("کشور ها"),
+            maintainState: true,
+            children: const [CountryFilterSectionWidget()],
           ),
 
         ])));

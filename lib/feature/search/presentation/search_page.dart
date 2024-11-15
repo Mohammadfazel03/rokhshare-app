@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rokhshare/config/dependency_injection.dart';
+import 'package:rokhshare/feature/search/presentation/widgets/country_filter_section_widget/bloc/country_filter_section_cubit.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/filter_section_widget/filter_section_widget.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/genre_filter_section_widget/bloc/genre_filter_section_cubit.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/search_field_widget.dart';
 import 'package:rokhshare/gen/assets.gen.dart';
 
-class SearchPage extends StatefulWidget  {
+class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
 
   @override
   State<SearchPage> createState() => _SearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage> with AutomaticKeepAliveClientMixin {
+class _SearchPageState extends State<SearchPage>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -38,10 +40,9 @@ class _SearchPageState extends State<SearchPage> with AutomaticKeepAliveClientMi
               const SizedBox(width: 8),
               IconButton.filledTonal(
                   style: ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll(
-                          Theme.of(context)
-                              .colorScheme
-                              .surfaceContainerHighest),
+                      backgroundColor: WidgetStatePropertyAll(Theme.of(context)
+                          .colorScheme
+                          .surfaceContainerHighest),
                       shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8)))),
                   onPressed: () {
@@ -50,7 +51,9 @@ class _SearchPageState extends State<SearchPage> with AutomaticKeepAliveClientMi
                         builder: (_) {
                           return MultiBlocProvider(providers: [
                             BlocProvider.value(
-                                value: getIt.get<GenreFilterSectionCubit>())
+                                value: getIt.get<GenreFilterSectionCubit>()),
+                            BlocProvider.value(
+                                value: getIt.get<CountryFilterSectionCubit>())
                           ], child: const FilterSectionWidget());
                         },
                         isScrollControlled: true,
