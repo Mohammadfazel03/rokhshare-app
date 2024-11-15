@@ -39,17 +39,20 @@ class _MainPageState extends State<MainPage> {
           BlocProvider(
               create: (context) => CategoryCubit(repository: getIt.get()))
         ],
-        child: Scaffold(
-          bottomNavigationBar: MainBottomNavigationBar(controller: _controller),
-          body: PageView(
-            controller: _controller,
-            physics: const NeverScrollableScrollPhysics(),
-            children: const [
-              HomePage(),
-              SearchPage(),
-              CategoryPage(),
-              UserPage()
-            ],
+        child: SafeArea(
+          child: Scaffold(
+            extendBody: true,
+            bottomNavigationBar: MainBottomNavigationBar(controller: _controller),
+            body: PageView(
+              controller: _controller,
+              physics: const NeverScrollableScrollPhysics(),
+              children: const [
+                HomePage(),
+                SearchPage(),
+                CategoryPage(),
+                UserPage()
+              ],
+            ),
           ),
         ));
   }
