@@ -6,6 +6,7 @@ import 'package:rokhshare/feature/search/presentation/widgets/date_filter_sectio
 import 'package:rokhshare/feature/search/presentation/widgets/filter_section_widget/filter_section_widget.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/genre_filter_section_widget/bloc/genre_filter_section_cubit.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/search_field_widget.dart';
+import 'package:rokhshare/feature/search/presentation/widgets/sort_by_section_widget/bloc/sort_by_section_cubit.dart';
 import 'package:rokhshare/gen/assets.gen.dart';
 
 class SearchPage extends StatefulWidget {
@@ -56,7 +57,9 @@ class _SearchPageState extends State<SearchPage>
                             BlocProvider.value(
                                 value: getIt.get<CountryFilterSectionCubit>()),
                             BlocProvider.value(
-                                value: getIt.get<DateFilterSectionCubit>())
+                                value: getIt.get<DateFilterSectionCubit>()),
+                            BlocProvider.value(
+                                value: getIt.get<SortBySectionCubit>())
                           ], child: const FilterSectionWidget());
                         },
                         isScrollControlled: true,

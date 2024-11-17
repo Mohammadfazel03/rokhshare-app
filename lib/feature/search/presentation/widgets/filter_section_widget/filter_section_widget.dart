@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/country_filter_section_widget/country_filter_section_widget.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/date_filter_section_widget/date_filter_section_widget.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/genre_filter_section_widget/genre_filter_section_widget.dart';
+import 'package:rokhshare/feature/search/presentation/widgets/sort_by_section_widget/sort_by_section_widget.dart';
 
 class FilterSectionWidget extends StatefulWidget {
   const FilterSectionWidget({super.key});
@@ -49,6 +50,7 @@ class _FilterSectionWidgetState extends State<FilterSectionWidget> {
             children: const [CountryFilterSectionWidget()],
           ),
           const DateFilterSectionWidget(),
+          const SortBySectionWidget(),
         ])));
   }
 }
