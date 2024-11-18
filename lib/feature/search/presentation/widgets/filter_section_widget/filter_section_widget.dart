@@ -3,6 +3,7 @@ import 'package:rokhshare/feature/search/presentation/widgets/country_filter_sec
 import 'package:rokhshare/feature/search/presentation/widgets/date_filter_section_widget/date_filter_section_widget.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/genre_filter_section_widget/genre_filter_section_widget.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/sort_by_section_widget/sort_by_section_widget.dart';
+import 'package:rokhshare/feature/search/presentation/widgets/type_section_widget/type_section_widget.dart';
 
 class FilterSectionWidget extends StatefulWidget {
   const FilterSectionWidget({super.key});
@@ -23,6 +24,7 @@ class _FilterSectionWidgetState extends State<FilterSectionWidget> {
         ),
         body: SingleChildScrollView(
             child: Column(children: [
+          TypeSectionWidget(),
           ExpansionTile(
             collapsedShape: Border.symmetric(
                 horizontal: BorderSide(

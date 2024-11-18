@@ -13,6 +13,7 @@ import 'package:rokhshare/feature/search/presentation/widgets/country_filter_sec
 import 'package:rokhshare/feature/search/presentation/widgets/date_filter_section_widget/bloc/date_filter_section_cubit.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/genre_filter_section_widget/bloc/genre_filter_section_cubit.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/sort_by_section_widget/bloc/sort_by_section_cubit.dart';
+import 'package:rokhshare/feature/search/presentation/widgets/type_section_widget/bloc/type_section_cubit.dart';
 
 import 'dio_config.dart';
 
@@ -47,4 +48,7 @@ Future<void> setup() async {
 
   getIt.registerLazySingleton<SortBySectionCubit>(
       () => SortBySectionCubit());
+
+  getIt.registerLazySingleton<TypeSectionCubit>(
+      () => TypeSectionCubit());
 }
