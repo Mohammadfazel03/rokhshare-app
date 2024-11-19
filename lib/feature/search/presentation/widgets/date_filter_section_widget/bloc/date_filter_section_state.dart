@@ -5,4 +5,10 @@ class DateFilterSectionState {
 
   final PickerDateRange? range;
   final PickerDateRange? tempRange;
+
+  bool isNewFilter() {
+    bool value = range?.endDate?.year == tempRange?.endDate?.year &&
+        range?.startDate?.year == tempRange?.startDate?.year;
+    return value;
+  }
 }

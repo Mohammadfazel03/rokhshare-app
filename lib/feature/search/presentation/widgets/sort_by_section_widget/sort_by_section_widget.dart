@@ -30,7 +30,7 @@ class _SortBySectionWidgetState extends State<SortBySectionWidget> {
                     width: 0.5, color: Theme.of(context).colorScheme.primary)),
             dense: true,
             title: const Text("مرتب سازی"),
-            maintainState: true,
+            maintainState: false,
             children: SortBy.values.map<Widget>((x) {
               return RadioListTile(
                   dense: true,

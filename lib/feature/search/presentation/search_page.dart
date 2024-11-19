@@ -48,8 +48,8 @@ class _SearchPageState extends State<SearchPage>
                           .surfaceContainerHighest),
                       shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8)))),
-                  onPressed: () {
-                    showModalBottomSheet(
+                  onPressed: () async {
+                    var res = await showModalBottomSheet(
                         context: context,
                         builder: (_) {
                           return MultiBlocProvider(providers: [

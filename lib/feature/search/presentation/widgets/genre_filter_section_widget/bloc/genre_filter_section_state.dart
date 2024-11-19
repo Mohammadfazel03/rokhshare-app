@@ -58,4 +58,9 @@ final class GenreFilterSectionState {
       error: error ?? this.error,
     );
   }
+
+  bool isNewFilter() {
+    bool value = const UnorderedIterableEquality().equals(tempSelected, selectedItem);
+    return value;
+  }
 }

@@ -4,7 +4,10 @@ import 'package:rokhshare/feature/search/presentation/widgets/date_filter_sectio
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class DateFilterSectionWidget extends StatefulWidget {
-  const DateFilterSectionWidget({super.key});
+  final DateRangePickerController dateRangePickerController;
+
+  const DateFilterSectionWidget(
+      {super.key, required this.dateRangePickerController});
 
   @override
   State<DateFilterSectionWidget> createState() =>
@@ -12,8 +15,7 @@ class DateFilterSectionWidget extends StatefulWidget {
 }
 
 class _DateFilterSectionWidgetState extends State<DateFilterSectionWidget> {
-  DateRangePickerController dateRangePickerController =
-      DateRangePickerController();
+  get dateRangePickerController => widget.dateRangePickerController;
 
   @override
   void initState() {
@@ -121,6 +123,7 @@ class _DateFilterSectionWidgetState extends State<DateFilterSectionWidget> {
                                   BlocProvider.of<DateFilterSectionCubit>(
                                           context)
                                       .clear();
+                                  widget.dateRangePickerController.selectedRange = null;
                                 }
                               : null,
                           child: const Text("حذف فیلتر")));

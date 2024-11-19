@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:collection/collection.dart';
 
 part 'type_section_state.dart';
 
@@ -27,7 +28,7 @@ class TypeSectionCubit extends Cubit<TypeSectionState> {
   }
 
   void clear() {
-    emit(state.copyWith(tempSelectedItem: null));
+    emit(state.copyWith(tempSelectedItem: List.of(MediaType.values)));
   }
 
   void init() {

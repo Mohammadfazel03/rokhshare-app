@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/genre_filter_section_widget/bloc/genre_filter_section_cubit.dart';
-import 'package:rokhshare/feature/search/presentation/widgets/interactive_checkbox_list_tile.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/search_field_widget.dart';
 import 'package:rokhshare/utils/error_widget.dart';
 
@@ -69,7 +68,8 @@ class _GenreFilterSectionWidgetState extends State<GenreFilterSectionWidget> {
               ],
               BlocBuilder<GenreFilterSectionCubit, GenreFilterSectionState>(
                   buildWhen: (p, c) {
-                return p.filteredData != c.filteredData;
+                return p.filteredData != c.filteredData ||
+                    c.tempSelected.length != p.tempSelected.length;
               }, builder: (context, state) {
                 return SizedBox(
                   height: ((state.filteredData?.length ?? 0) > 5)
@@ -79,17 +79,18 @@ class _GenreFilterSectionWidgetState extends State<GenreFilterSectionWidget> {
                     itemCount: state.filteredData?.length ?? 0,
                     itemExtent: 48,
                     itemBuilder: (context, index) {
-                      return InteractiveCheckboxListTile(
+                      return CheckboxListTile(
                         key: Key(state.filteredData![index].title ??
                             state.filteredData![index].hashCode.toString()),
                         value: state.tempSelected
                             .contains(state.filteredData![index]),
                         onChanged: (value) {
                           if (value == true) {
-                            state.tempSelected.add(state.filteredData![index]);
+                            BlocProvider.of<GenreFilterSectionCubit>(context)
+                                .selectItem(state.filteredData![index]);
                           } else if (value == false) {
-                            state.tempSelected
-                                .remove(state.filteredData![index]);
+                            BlocProvider.of<GenreFilterSectionCubit>(context)
+                                .removeItem(state.filteredData![index]);
                           }
                         },
                         title: Text(state.filteredData![index].title ?? ""),

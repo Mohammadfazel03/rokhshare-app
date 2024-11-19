@@ -27,4 +27,9 @@ class TypeSectionState {
         tempSelectedItem: tempSelectedItem ?? this.tempSelectedItem,
         selectedItem: selectedItem ?? this.selectedItem);
   }
+
+  bool isNewFilter() {
+    bool value = const UnorderedIterableEquality().equals(tempSelectedItem, selectedItem);
+    return value;
+  }
 }

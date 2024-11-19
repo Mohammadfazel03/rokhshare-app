@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/country_filter_section_widget/bloc/country_filter_section_cubit.dart';
-import 'package:rokhshare/feature/search/presentation/widgets/interactive_checkbox_list_tile.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/search_field_widget.dart';
 import 'package:rokhshare/utils/error_widget.dart';
 
@@ -15,7 +14,8 @@ class CountryFilterSectionWidget extends StatefulWidget {
       _CountryFilterSectionWidgetState();
 }
 
-class _CountryFilterSectionWidgetState extends State<CountryFilterSectionWidget> {
+class _CountryFilterSectionWidgetState
+    extends State<CountryFilterSectionWidget> {
   late final TextEditingController searchController;
 
   @override
@@ -41,16 +41,16 @@ class _CountryFilterSectionWidgetState extends State<CountryFilterSectionWidget>
         if (countryState.status == CountryFilterSectionStatus.loading) {
           return const Center(
               child: Padding(
-                padding: EdgeInsets.all(16),
-                child: CircularProgressIndicator.adaptive(),
-              ));
+            padding: EdgeInsets.all(16),
+            child: CircularProgressIndicator.adaptive(),
+          ));
         } else if (countryState.status == CountryFilterSectionStatus.success) {
           return Column(
             children: [
               if ((countryState.data?.length ?? 0) > 1) ...[
                 Padding(
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: SearchFieldWidget(
                     controller: searchController,
                     isDense: true,
@@ -59,7 +59,7 @@ class _CountryFilterSectionWidgetState extends State<CountryFilterSectionWidget>
                     showClearIcon: true,
                     hintStyle: Theme.of(context).textTheme.bodyMedium,
                     suffixIconConstraints:
-                    const BoxConstraints(maxHeight: 32, maxWidth: 32),
+                        const BoxConstraints(maxHeight: 32, maxWidth: 32),
                     onChange: (text) {
                       BlocProvider.of<CountryFilterSectionCubit>(context)
                           .searchData(text);
@@ -69,8 +69,9 @@ class _CountryFilterSectionWidgetState extends State<CountryFilterSectionWidget>
               ],
               BlocBuilder<CountryFilterSectionCubit, CountryFilterSectionState>(
                   buildWhen: (p, c) {
-                    return p.filteredData != c.filteredData;
-                  }, builder: (context, state) {
+                return p.filteredData != c.filteredData ||
+                    c.tempSelected.length != p.tempSelected.length;
+              }, builder: (context, state) {
                 return SizedBox(
                   height: ((state.filteredData?.length ?? 0) > 5)
                       ? 240
@@ -79,17 +80,18 @@ class _CountryFilterSectionWidgetState extends State<CountryFilterSectionWidget>
                     itemCount: state.filteredData?.length ?? 0,
                     itemExtent: 48,
                     itemBuilder: (context, index) {
-                      return InteractiveCheckboxListTile(
+                      return CheckboxListTile(
                         key: Key(state.filteredData![index].name ??
                             state.filteredData![index].hashCode.toString()),
                         value: state.tempSelected
                             .contains(state.filteredData![index]),
                         onChanged: (value) {
                           if (value == true) {
-                            state.tempSelected.add(state.filteredData![index]);
+                            BlocProvider.of<CountryFilterSectionCubit>(context)
+                                .selectItem(state.filteredData![index]);
                           } else if (value == false) {
-                            state.tempSelected
-                                .remove(state.filteredData![index]);
+                            BlocProvider.of<CountryFilterSectionCubit>(context)
+                                .removeItem(state.filteredData![index]);
                           }
                         },
                         title: Text(state.filteredData![index].name ?? ""),

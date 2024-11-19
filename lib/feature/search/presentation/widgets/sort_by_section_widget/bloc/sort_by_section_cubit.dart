@@ -16,7 +16,7 @@ class SortBySectionCubit extends Cubit<SortBySectionState> {
   }
 
   void clear() {
-    emit(state.copyWith(tempSortBy: null));
+    emit(state.copyWith(tempSortBy: SortBy.titleASC));
   }
 
   void init() {

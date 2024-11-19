@@ -3,6 +3,7 @@ import 'package:rokhshare/feature/home/data/remote/model/country.dart';
 import 'package:rokhshare/feature/search/data/repositories/search_repository.dart';
 import 'package:rokhshare/utils/data_response.dart';
 import 'package:rokhshare/utils/error_entity.dart';
+import 'package:collection/collection.dart';
 
 part 'country_filter_section_state.dart';
 
@@ -40,20 +41,23 @@ class CountryFilterSectionCubit extends Cubit<CountryFilterSectionState> {
   }
 
   void clearAllSelectedItem() {
-    emit(state.copyWith(tempSelected: [], selectedItem: []));
+    emit(state.copyWith(tempSelected: []));
   }
+
 
   void finalizeSelectedItem() {
     if (state.status == CountryFilterSectionStatus.success) {
-      state.selectedItem.clear();
-      state.selectedItem.addAll(state.tempSelected);
+      emit(state.copyWith(
+          selectedItem: List.of(state.tempSelected)
+      ));
     }
   }
 
   void initialSelectedItem() {
     if (state.status == CountryFilterSectionStatus.success) {
-      state.tempSelected.clear();
-      state.tempSelected.addAll(state.selectedItem);
+      emit(state.copyWith(
+          tempSelected: List.of(state.selectedItem)
+      ));
     }
   }
 
@@ -79,5 +83,17 @@ class CountryFilterSectionCubit extends Cubit<CountryFilterSectionState> {
         emit(state.copyWith(filteredData: state.data));
       }
     }
+  }
+
+  void selectItem(Country item) {
+    emit(state.copyWith(
+        tempSelected: List.of(state.tempSelected)..add(item)
+    ));
+  }
+
+  void removeItem(Country item) {
+    emit(state.copyWith(
+        tempSelected: List.of(state.tempSelected)..remove(item)
+    ));
   }
 }

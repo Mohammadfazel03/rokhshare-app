@@ -37,4 +37,10 @@ class SortBySectionState {
         tempSortBy: tempSortBy ?? this.tempSortBy,
         sortBy: sortBy ?? this.sortBy);
   }
+
+
+  bool isNewFilter() {
+    bool value = tempSortBy == sortBy;
+    return value;
+  }
 }
