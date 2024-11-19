@@ -12,6 +12,15 @@ enum MediaType {
     }
     return "";
   }
+
+  String toServerName() {
+    if (this == MediaType.movie) {
+      return "movie";
+    } else if (this == MediaType.series) {
+      return "series";
+    }
+    return "";
+  }
 }
 
 class TypeSectionState {

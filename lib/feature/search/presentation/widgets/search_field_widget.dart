@@ -5,6 +5,7 @@ class SearchFieldWidget extends StatefulWidget {
   final String hintText;
   final TextStyle? hintStyle;
   final Function(String? text)? onChange;
+  final Function(String? text)? onSubmitted;
   final TextEditingController _controller;
   final bool showSearchIcon;
   final bool showClearIcon;
@@ -24,7 +25,7 @@ class SearchFieldWidget extends StatefulWidget {
       this.prefixIcon,
       this.prefixIconConstraints,
       this.suffixIconConstraints,
-      this.onChange})
+      this.onChange, this.onSubmitted})
       : _controller = controller ?? TextEditingController();
 
   @override
@@ -37,6 +38,11 @@ class _SearchFieldWidgetState extends State<SearchFieldWidget> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      onSubmitted: (text) {
+        if (widget.onSubmitted != null) {
+          widget.onSubmitted!(text);
+        }
+      },
       onChanged: (text) {
         if (isEmpty != text.isEmpty) {
           setState(() {

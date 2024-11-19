@@ -92,6 +92,26 @@ class Media {
 
   String? get releaseDate => _releaseDate;
 
+  String get genresName {
+    String s = "";
+    for (int i = 0; i < (genres?.length ?? 0); i++) {
+      if (i + 1 == (genres?.length ?? 0)) {
+        s += (genres![i].title ?? "");
+      } else {
+        s += "${genres![i].title ?? ""} | ";
+      }
+    }
+    return s;
+  }
+
+  String? get yearReleaseDate {
+    var d = DateTime.tryParse(releaseDate ?? "");
+    if (d != null) {
+      return d.year.toString();
+    }
+    return "";
+  }
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = _id;

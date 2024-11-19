@@ -24,6 +24,23 @@ enum SortBy {
     }
     return "";
   }
+
+  String toServerName() {
+    if (this == SortBy.titleASC) {
+      return "name";
+    } else if (this == SortBy.titleDESC) {
+      return "-name";
+    } else if (this == SortBy.releaseDateASC) {
+      return "release_date";
+    } else if (this == SortBy.releaseDateDESC) {
+      return "-release_date";
+    } else if (this == SortBy.ratingASC) {
+      return "rate";
+    } else if (this == SortBy.ratingDESC) {
+      return "-rate";
+    }
+    return "";
+  }
 }
 
 class SortBySectionState {

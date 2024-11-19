@@ -6,6 +6,7 @@ import 'package:rokhshare/feature/category/presentation/category_page.dart';
 import 'package:rokhshare/feature/home/presentation/bloc/home_cubit.dart';
 import 'package:rokhshare/feature/home/presentation/home_page.dart';
 import 'package:rokhshare/feature/main/presentation/widgets/main_bottom_navigation_bar.dart';
+import 'package:rokhshare/feature/search/presentation/bloc/search_cubit.dart';
 import 'package:rokhshare/feature/search/presentation/search_page.dart';
 import 'package:rokhshare/feature/user/presentation/user_page.dart';
 
@@ -37,7 +38,9 @@ class _MainPageState extends State<MainPage> {
         providers: [
           BlocProvider(create: (context) => HomeCubit(repository: getIt.get())),
           BlocProvider(
-              create: (context) => CategoryCubit(repository: getIt.get()))
+              create: (context) => CategoryCubit(repository: getIt.get())),
+          BlocProvider(
+              create: (context) => SearchCubit(repository: getIt.get())),
         ],
         child: SafeArea(
           child: Scaffold(

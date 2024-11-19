@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rokhshare/feature/home/data/remote/model/country.dart';
+import 'package:rokhshare/feature/home/data/remote/model/genre.dart';
+import 'package:rokhshare/feature/search/presentation/bloc/search_cubit.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/country_filter_section_widget/bloc/country_filter_section_cubit.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/country_filter_section_widget/country_filter_section_widget.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/date_filter_section_widget/bloc/date_filter_section_cubit.dart';
@@ -153,6 +156,23 @@ class _FilterSectionWidgetState extends State<FilterSectionWidget> {
                   child: FilledButton(
                     onPressed: enable
                         ? () {
+                            SearchFilter filter = SearchFilter(
+                                query: null,
+                                type: typeState.tempSelectedItem.length == 2
+                                    ? 'both'
+                                    : typeState.tempSelectedItem.first
+                                        .toServerName(),
+                                genres: genreState.tempSelected
+                                    .map<int>((Genre x) => x.id ?? -1)
+                                    .toList(),
+                                countries: countryState.tempSelected
+                                    .map<int>((Country x) => x.id ?? -1)
+                                    .toList(),
+                                range: dateState.tempRange,
+                                sortBy: sortState.tempSortBy?.toServerName() ??
+                                    "-name");
+                            Navigator.of(context).pop(filter);
+
                             BlocProvider.of<GenreFilterSectionCubit>(context)
                                 .finalizeSelectedItem();
                             BlocProvider.of<CountryFilterSectionCubit>(context)
@@ -163,7 +183,6 @@ class _FilterSectionWidgetState extends State<FilterSectionWidget> {
                                 .finalize();
                             BlocProvider.of<TypeSectionCubit>(context)
                                 .finalize();
-                            Navigator.of(context).pop();
                           }
                         : null,
                     style: ButtonStyle(
