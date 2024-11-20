@@ -39,9 +39,24 @@ class $AssetsIconsGen {
   SvgGenImage get imageBroken =>
       const SvgGenImage('assets/icons/image_broken.svg');
 
+  /// File path: assets/icons/info-circle-bold.svg
+  SvgGenImage get infoCircleBold =>
+      const SvgGenImage('assets/icons/info-circle-bold.svg');
+
   /// File path: assets/icons/magnifer_linear.svg
   SvgGenImage get magniferLinear =>
       const SvgGenImage('assets/icons/magnifer_linear.svg');
+
+  /// File path: assets/icons/moon-bold.svg
+  SvgGenImage get moonBold => const SvgGenImage('assets/icons/moon-bold.svg');
+
+  /// File path: assets/icons/phone-rounded-bold.svg
+  SvgGenImage get phoneRoundedBold =>
+      const SvgGenImage('assets/icons/phone-rounded-bold.svg');
+
+  /// File path: assets/icons/question-circle-bold.svg
+  SvgGenImage get questionCircleBold =>
+      const SvgGenImage('assets/icons/question-circle-bold.svg');
 
   /// File path: assets/icons/reel_linear.svg
   SvgGenImage get reelLinear =>
@@ -58,6 +73,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/rounded_magnifer_sharp.svg
   SvgGenImage get roundedMagniferSharp =>
       const SvgGenImage('assets/icons/rounded_magnifer_sharp.svg');
+
+  /// File path: assets/icons/sun-bold.svg
+  SvgGenImage get sunBold => const SvgGenImage('assets/icons/sun-bold.svg');
 
   /// File path: assets/icons/user_outline.svg
   SvgGenImage get userOutline =>
@@ -90,11 +108,16 @@ class $AssetsIconsGen {
         categorySharp,
         filterBold,
         imageBroken,
+        infoCircleBold,
         magniferLinear,
+        moonBold,
+        phoneRoundedBold,
+        questionCircleBold,
         reelLinear,
         restartLinear,
         roundedMagniferOutline,
         roundedMagniferSharp,
+        sunBold,
         userOutline,
         userRoundedOutline,
         userSharp,
@@ -107,6 +130,10 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/login_tv.png
+  AssetGenImage get loginTv =>
+      const AssetGenImage('assets/images/login_tv.png');
+
   /// File path: assets/images/test.png
   AssetGenImage get test => const AssetGenImage('assets/images/test.png');
 
@@ -115,7 +142,7 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/walking_dead.jpg');
 
   /// List of all assets
-  List<AssetGenImage> get values => [test, walkingDead];
+  List<AssetGenImage> get values => [loginTv, test, walkingDead];
 }
 
 class Assets {
