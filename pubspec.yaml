@@ -100,18 +100,77 @@ flutter:
       fonts:
         - asset: assets/fonts/IRANSans.ttf
           style: normal
-    - family: iran-yekan
-      fonts:
-        - asset: assets/fonts/BYekan.ttf
-          style: normal
-    - family: dana
-      fonts:
-        - asset: assets/fonts/dana_regular.ttf
-          style: normal
     - family: iran-sans-mobile
       fonts:
         - asset: assets/fonts/SansMobile.ttf
           style: normal
+    - family: pinar
+      fonts:
+        - asset: assets/fonts/pinar/Pinar-Light.ttf
+          style: normal
+          weight: 300
+        - asset: assets/fonts/pinar/Pinar-Regular.ttf
+          style: normal
+          weight: 400
+        - asset: assets/fonts/pinar/Pinar-Medium.ttf
+          style: normal
+          weight: 500
+        - asset: assets/fonts/pinar/Pinar-SemiBold.ttf
+          style: normal
+          weight: 600
+        - asset: assets/fonts/pinar/Pinar-Bold.ttf
+          style: normal
+          weight: 700
+        - asset: assets/fonts/pinar/Pinar-ExtraBold.ttf
+          style: normal
+          weight: 800
+        - asset: assets/fonts/pinar/Pinar-Black.ttf
+          style: normal
+          weight: 900
+    - family: dana
+      fonts:
+        - asset: assets/fonts/dana/light.ttf
+          style: normal
+          weight: 300
+        - asset: assets/fonts/dana/regular.ttf
+          style: normal
+          weight: 400
+        - asset: assets/fonts/dana/medium.ttf
+          style: normal
+          weight: 500
+        - asset: assets/fonts/dana/semiBold.ttf
+          style: normal
+          weight: 600
+        - asset: assets/fonts/dana/bold.ttf
+          style: normal
+          weight: 700
+        - asset: assets/fonts/dana/black.ttf
+          style: normal
+          weight: 900
+
+    - family: iranYekan
+      fonts:
+        - asset: assets/fonts/iranYekan/thin.ttf
+          style: normal
+          weight: 100
+        - asset: assets/fonts/iranYekan/light.ttf
+          style: normal
+          weight: 300
+        - asset: assets/fonts/iranYekan/regular.ttf
+          style: normal
+          weight: 400
+        - asset: assets/fonts/iranYekan/medium.ttf
+          style: normal
+          weight: 500
+        - asset: assets/fonts/iranYekan/bold.ttf
+          style: normal
+          weight: 700
+        - asset: assets/fonts/iranYekan/extraBold.ttf
+          style: normal
+          weight: 700
+        - asset: assets/fonts/iranYekan/black.ttf
+          style: normal
+          weight: 900
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

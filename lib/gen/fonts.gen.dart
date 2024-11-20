@@ -19,6 +19,9 @@ class FontFamily {
   /// Font family: iran-sans-mobile
   static const String iranSansMobile = 'iran-sans-mobile';
 
-  /// Font family: iran-yekan
-  static const String iranYekan = 'iran-yekan';
+  /// Font family: iranYekan
+  static const String iranYekan = 'iranYekan';
+
+  /// Font family: pinar
+  static const String pinar = 'pinar';
 }
