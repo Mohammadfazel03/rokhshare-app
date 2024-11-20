@@ -6,6 +6,9 @@ import 'package:rokhshare/feature/category/data/repositories/home_repository_imp
 import 'package:rokhshare/feature/home/data/remote/home_api_service.dart';
 import 'package:rokhshare/feature/home/data/repositories/home_repository.dart';
 import 'package:rokhshare/feature/home/data/repositories/home_repository_impl.dart';
+import 'package:rokhshare/feature/media_items/data/remote/media_items_api_service.dart';
+import 'package:rokhshare/feature/media_items/data/repositories/media_items_repository.dart';
+import 'package:rokhshare/feature/media_items/data/repositories/media_items_repository_impl.dart';
 import 'package:rokhshare/feature/search/data/remote/search_api_service.dart';
 import 'package:rokhshare/feature/search/data/repositories/search_repository.dart';
 import 'package:rokhshare/feature/search/data/repositories/search_repository_impl.dart';
@@ -36,6 +39,11 @@ Future<void> setup() async {
   getIt.registerSingleton<SearchRepository>(
       SearchRepositoryImpl(apiService: getIt.get()));
 
+  getIt.registerSingleton<MediaItemsApiService>(
+      MediaItemsApiService(dio: getIt.get()));
+  getIt.registerSingleton<MediaItemsRepository>(
+      MediaItemsRepositoryImpl(api: getIt.get()));
+
   // register bloc
   getIt.registerLazySingleton<GenreFilterSectionCubit>(
       () => GenreFilterSectionCubit(repository: getIt.get()));
@@ -46,9 +54,7 @@ Future<void> setup() async {
   getIt.registerLazySingleton<DateFilterSectionCubit>(
       () => DateFilterSectionCubit());
 
-  getIt.registerLazySingleton<SortBySectionCubit>(
-      () => SortBySectionCubit());
+  getIt.registerLazySingleton<SortBySectionCubit>(() => SortBySectionCubit());
 
-  getIt.registerLazySingleton<TypeSectionCubit>(
-      () => TypeSectionCubit());
+  getIt.registerLazySingleton<TypeSectionCubit>(() => TypeSectionCubit());
 }

@@ -7,7 +7,9 @@ class CustomErrorWidget extends StatelessWidget {
   final bool showIcon;
   final bool showTitle;
   final bool showMessage;
+  final bool showButton;
   final Widget? icon;
+  final Widget? retryButton;
   final Function() onRetry;
 
   const CustomErrorWidget(
@@ -17,7 +19,9 @@ class CustomErrorWidget extends StatelessWidget {
       this.showIcon = false,
       this.showTitle = false,
       this.showMessage = true,
-      this.icon});
+      this.showButton = true,
+      this.icon,
+      this.retryButton});
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +52,16 @@ class CustomErrorWidget extends StatelessWidget {
             if (showMessage) ...[
               Text(error.error),
             ],
-            TextButton.icon(
-                onPressed: onRetry,
-                label: const Text("تلاش دوباره"),
-                icon: const Icon(Icons.refresh))
+            if (showButton) ...[
+              if (retryButton != null) ...[
+                retryButton!
+              ] else ...[
+                TextButton.icon(
+                    onPressed: onRetry,
+                    label: const Text("تلاش دوباره"),
+                    icon: const Icon(Icons.refresh))
+              ]
+            ]
           ],
         ),
       ),

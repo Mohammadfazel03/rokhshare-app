@@ -130,6 +130,10 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/error_emote.svg
+  SvgGenImage get errorEmote =>
+      const SvgGenImage('assets/images/error_emote.svg');
+
   /// File path: assets/images/login_tv.png
   AssetGenImage get loginTv =>
       const AssetGenImage('assets/images/login_tv.png');
@@ -142,7 +146,7 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/walking_dead.jpg');
 
   /// List of all assets
-  List<AssetGenImage> get values => [loginTv, test, walkingDead];
+  List<dynamic> get values => [errorEmote, loginTv, test, walkingDead];
 }
 
 class Assets {

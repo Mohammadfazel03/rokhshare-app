@@ -2,7 +2,11 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rokhshare/config/dependency_injection.dart';
 import 'package:rokhshare/feature/home/data/remote/model/genre.dart';
+import 'package:rokhshare/feature/media_items/presentation/bloc/media_items_cubit.dart';
+import 'package:rokhshare/feature/media_items/presentation/media_items_page.dart';
 import 'package:rokhshare/gen/fonts.gen.dart';
 
 class GenreItemWidget extends StatefulWidget {
@@ -28,6 +32,15 @@ class _GenreItemWidgetState extends State<GenreItemWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => MediaItemsCubit(repository: getIt.get()),
+                  child: MediaItemsPage(
+                      title: widget.genre.title ?? "",
+                      categoryId: widget.genre.id),
+                )));
+      },
       onTapDown: (_) {
         _changeScaleDown();
       },
@@ -46,7 +59,8 @@ class _GenreItemWidgetState extends State<GenreItemWidget> {
               borderRadius: BorderRadius.circular(4),
               image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: CachedNetworkImageProvider(widget.genre.poster ?? ""))),
+                  image:
+                      CachedNetworkImageProvider(widget.genre.poster ?? ""))),
           child: Stack(
             children: [
               Positioned.fill(
@@ -65,13 +79,10 @@ class _GenreItemWidgetState extends State<GenreItemWidget> {
                       textAlign: TextAlign.center,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: FontFamily.dana
-                      )),
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: FontFamily.dana)),
                 ),
               ),
             ],

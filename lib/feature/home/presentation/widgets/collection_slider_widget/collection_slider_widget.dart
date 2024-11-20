@@ -1,7 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rokhshare/config/dependency_injection.dart';
 import 'package:rokhshare/feature/home/data/remote/model/collection.dart';
 import 'package:rokhshare/feature/home/data/remote/model/media.dart';
+import 'package:rokhshare/feature/media_items/presentation/bloc/media_items_cubit.dart';
+import 'package:rokhshare/feature/media_items/presentation/media_items_page.dart';
 import 'package:rokhshare/gen/assets.gen.dart';
 
 class CollectionSliderWidget extends StatelessWidget {
@@ -30,8 +34,20 @@ class CollectionSliderWidget extends StatelessWidget {
                                 .textTheme
                                 .titleLarge
                                 ?.copyWith(fontWeight: FontWeight.bold)),
-                        Assets.icons.arrowLeftLinear
-                            .svg(color: Theme.of(context).iconTheme.color)
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => BlocProvider(
+                                      create: (context) => MediaItemsCubit(
+                                          repository: getIt.get()),
+                                      child: MediaItemsPage(
+                                          title: collection.name ?? "",
+                                          collectionId: collection.id),
+                                    )));
+                          },
+                          child: Assets.icons.arrowLeftLinear
+                              .svg(color: Theme.of(context).iconTheme.color),
+                        )
                       ])),
               SizedBox(
                   height: 265,
@@ -61,6 +77,7 @@ class _MovieItemState extends State<MovieItem> {
   void _changeScaleDown() {
     setState(() => scale = 0.9);
   }
+
   void _changeScaleUp() {
     setState(() => scale = 1);
   }
