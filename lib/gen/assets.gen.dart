@@ -43,6 +43,14 @@ class $AssetsIconsGen {
   SvgGenImage get infoCircleBold =>
       const SvgGenImage('assets/icons/info-circle-bold.svg');
 
+  /// File path: assets/icons/letter-bold.svg
+  SvgGenImage get letterBold =>
+      const SvgGenImage('assets/icons/letter-bold.svg');
+
+  /// File path: assets/icons/lock-keyhole-bold.svg
+  SvgGenImage get lockKeyholeBold =>
+      const SvgGenImage('assets/icons/lock-keyhole-bold.svg');
+
   /// File path: assets/icons/magnifer_linear.svg
   SvgGenImage get magniferLinear =>
       const SvgGenImage('assets/icons/magnifer_linear.svg');
@@ -109,6 +117,8 @@ class $AssetsIconsGen {
         filterBold,
         imageBroken,
         infoCircleBold,
+        letterBold,
+        lockKeyholeBold,
         magniferLinear,
         moonBold,
         phoneRoundedBold,
@@ -134,6 +144,26 @@ class $AssetsImagesGen {
   SvgGenImage get errorEmote =>
       const SvgGenImage('assets/images/error_emote.svg');
 
+  /// File path: assets/images/login_frame_dark.png
+  AssetGenImage get loginFrameDark =>
+      const AssetGenImage('assets/images/login_frame_dark.png');
+
+  /// File path: assets/images/login_frame_light.png
+  AssetGenImage get loginFrameLight =>
+      const AssetGenImage('assets/images/login_frame_light.png');
+
+  /// File path: assets/images/login_logo.png
+  AssetGenImage get loginLogo =>
+      const AssetGenImage('assets/images/login_logo.png');
+
+  /// File path: assets/images/login_logo_dark.png
+  AssetGenImage get loginLogoDark =>
+      const AssetGenImage('assets/images/login_logo_dark.png');
+
+  /// File path: assets/images/login_logo_light.png
+  AssetGenImage get loginLogoLight =>
+      const AssetGenImage('assets/images/login_logo_light.png');
+
   /// File path: assets/images/login_tv.png
   AssetGenImage get loginTv =>
       const AssetGenImage('assets/images/login_tv.png');
@@ -146,7 +176,17 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/walking_dead.jpg');
 
   /// List of all assets
-  List<dynamic> get values => [errorEmote, loginTv, test, walkingDead];
+  List<dynamic> get values => [
+        errorEmote,
+        loginFrameDark,
+        loginFrameLight,
+        loginLogo,
+        loginLogoDark,
+        loginLogoLight,
+        loginTv,
+        test,
+        walkingDead
+      ];
 }
 
 class Assets {
