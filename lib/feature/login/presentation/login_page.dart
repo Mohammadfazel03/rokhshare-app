@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rokhshare/feature/login/presentation/widgets/login_text_field.dart';
+import 'package:rokhshare/feature/signup/presentation/signup_page.dart';
 import 'package:rokhshare/gen/assets.gen.dart';
 
 class LoginPage extends StatefulWidget {
@@ -74,7 +75,12 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 12),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator
+                        .of(context)
+                        .pushReplacement(MaterialPageRoute(
+                        builder: (context) => SignupPage()));
+                  },
                   child: RichText(text: TextSpan(
                     children: [
                       TextSpan(text: "حساب کاربری ندارید؟", style: Theme.of(context).textTheme.labelMedium?.copyWith(
@@ -88,7 +94,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 24),
                 FilledButton(
-                  onPressed: () {},
+                  onPressed: () {
+
+                  },
                   style: ButtonStyle(
                       shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8)))),

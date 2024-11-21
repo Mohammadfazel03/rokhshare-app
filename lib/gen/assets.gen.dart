@@ -85,6 +85,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/sun-bold.svg
   SvgGenImage get sunBold => const SvgGenImage('assets/icons/sun-bold.svg');
 
+  /// File path: assets/icons/user-circle-bold.svg
+  SvgGenImage get userCircleBold =>
+      const SvgGenImage('assets/icons/user-circle-bold.svg');
+
   /// File path: assets/icons/user_outline.svg
   SvgGenImage get userOutline =>
       const SvgGenImage('assets/icons/user_outline.svg');
@@ -128,6 +132,7 @@ class $AssetsIconsGen {
         roundedMagniferOutline,
         roundedMagniferSharp,
         sunBold,
+        userCircleBold,
         userOutline,
         userRoundedOutline,
         userSharp,
