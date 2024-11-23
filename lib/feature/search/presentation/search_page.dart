@@ -326,7 +326,7 @@ class _MovieItemState extends State<MovieItem> {
                       overflow: TextOverflow.ellipsis),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 2, 8, 8),
+                  padding: const EdgeInsets.fromLTRB(8, 4, 8, 8),
                   child: Text(
                     widget.media.genresName,
                     maxLines: 1,

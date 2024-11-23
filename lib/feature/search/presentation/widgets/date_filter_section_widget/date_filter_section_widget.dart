@@ -37,10 +37,10 @@ class _DateFilterSectionWidgetState extends State<DateFilterSectionWidget> {
               horizontal: BorderSide(
                   width: 0.5,
                   color: Theme.of(context).colorScheme.outlineVariant)),
-          dense: true,
+          dense: false,
           title: Row(
             children: [
-              const Text("سال ساخت"),
+              Text("سال ساخت", style: Theme.of(context).textTheme.labelLarge),
               if (state.tempRange != null) ...[
                 const SizedBox(width: 8),
                 DecoratedBox(
@@ -53,6 +53,7 @@ class _DateFilterSectionWidgetState extends State<DateFilterSectionWidget> {
                       "${state.tempRange!.startDate!.year} - ${state.tempRange!.endDate!.year}",
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           fontSize: 9,
+                          fontWeight: FontWeight.w700,
                           color: Theme.of(context).colorScheme.onPrimary),
                     ),
                   ),
@@ -84,6 +85,16 @@ class _DateFilterSectionWidgetState extends State<DateFilterSectionWidget> {
         children: [
           Expanded(
             child: SfDateRangePicker(
+              rangeTextStyle: Theme.of(context)
+                  .textTheme
+                  .labelMedium
+                  ?.copyWith(fontWeight: FontWeight.w700),
+              selectionTextStyle: Theme.of(context)
+                  .textTheme
+                  .labelMedium
+                  ?.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: Theme.of(context).colorScheme.onPrimary),
               controller: dateRangePickerController,
               backgroundColor:
                   Theme.of(context).colorScheme.surfaceContainerLow,
@@ -102,7 +113,10 @@ class _DateFilterSectionWidgetState extends State<DateFilterSectionWidget> {
               ),
               selectionRadius: 8,
               yearCellStyle: DateRangePickerYearCellStyle(
-                textStyle: Theme.of(context).textTheme.labelMedium,
+                textStyle: Theme.of(context)
+                    .textTheme
+                    .labelMedium
+                    ?.copyWith(fontWeight: FontWeight.w600),
               ),
               extendableRangeSelectionDirection:
                   ExtendableRangeSelectionDirection.none,
@@ -123,7 +137,8 @@ class _DateFilterSectionWidgetState extends State<DateFilterSectionWidget> {
                                   BlocProvider.of<DateFilterSectionCubit>(
                                           context)
                                       .clear();
-                                  widget.dateRangePickerController.selectedRange = null;
+                                  widget.dateRangePickerController
+                                      .selectedRange = null;
                                 }
                               : null,
                           child: const Text("حذف فیلتر")));

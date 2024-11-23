@@ -94,7 +94,8 @@ class _CountryFilterSectionWidgetState
                                 .removeItem(state.filteredData![index]);
                           }
                         },
-                        title: Text(state.filteredData![index].name ?? ""),
+                        title: Text(state.filteredData![index].name ?? "",
+                            style: Theme.of(context).textTheme.labelMedium),
                         controlAffinity: ListTileControlAffinity.leading,
                         dense: true,
                       );

@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -111,9 +112,12 @@ class _CarouselSliderItemState extends State<CarouselSliderItem>
                           color: Theme.of(context).brightness == Brightness.dark
                               ? Colors.white.withOpacity(0.16)
                               : Colors.black.withOpacity(0.05),
-                          child: const Text(
+                          child: Text(
                             "پرطرفدار",
-                            style: TextStyle(color: Colors.white),
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelMedium
+                                ?.copyWith(color: Colors.white),
                           ),
                         ),
                       ),
@@ -138,7 +142,10 @@ class _CarouselSliderItemState extends State<CarouselSliderItem>
                               Text(
                                 " ${widget.item.rating ?? "--"} ",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(color: Colors.white),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelMedium
+                                    ?.copyWith(color: Colors.white),
                               ),
                             ],
                           ),
@@ -177,25 +184,27 @@ class _CarouselSliderItemState extends State<CarouselSliderItem>
                         widget.item.title ?? widget.item.media?.name ?? "",
                         style: Theme.of(context)
                             .textTheme
-                            .titleLarge
-                            ?.copyWith(color: Colors.white),
+                            .titleMedium
+                            ?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       if (widget.item.description != widget.item.title &&
                           widget.item.description != null &&
-                          widget.item.description != "")
-                        ...[
-                          const SizedBox(height: 4),
-                          Text(widget.item.description ?? "",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(color: Colors.white),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ]
+                          widget.item.description != "") ...[
+                        const SizedBox(height: 4),
+                        Text(
+                          widget.item.description ?? "",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall
+                              ?.copyWith(color: Colors.white),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ]
                     ],
                   ),
                 )),

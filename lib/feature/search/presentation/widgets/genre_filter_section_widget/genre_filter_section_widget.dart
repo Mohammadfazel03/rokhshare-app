@@ -93,7 +93,8 @@ class _GenreFilterSectionWidgetState extends State<GenreFilterSectionWidget> {
                                 .removeItem(state.filteredData![index]);
                           }
                         },
-                        title: Text(state.filteredData![index].title ?? ""),
+                        title: Text(state.filteredData![index].title ?? "",
+                            style: Theme.of(context).textTheme.labelMedium),
                         controlAffinity: ListTileControlAffinity.leading,
                         dense: true,
                       );

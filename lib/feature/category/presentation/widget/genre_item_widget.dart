@@ -7,7 +7,6 @@ import 'package:rokhshare/config/dependency_injection.dart';
 import 'package:rokhshare/feature/home/data/remote/model/genre.dart';
 import 'package:rokhshare/feature/media_items/presentation/bloc/media_items_cubit.dart';
 import 'package:rokhshare/feature/media_items/presentation/media_items_page.dart';
-import 'package:rokhshare/gen/fonts.gen.dart';
 
 class GenreItemWidget extends StatefulWidget {
   final Genre genre;
@@ -79,10 +78,8 @@ class _GenreItemWidgetState extends State<GenreItemWidget> {
                       textAlign: TextAlign.center,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: FontFamily.dana)),
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                          fontWeight: FontWeight.w700, color: Colors.white)),
                 ),
               ),
             ],

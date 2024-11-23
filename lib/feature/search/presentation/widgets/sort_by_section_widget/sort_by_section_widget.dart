@@ -28,14 +28,16 @@ class _SortBySectionWidgetState extends State<SortBySectionWidget> {
             shape: Border.symmetric(
                 horizontal: BorderSide(
                     width: 0.5, color: Theme.of(context).colorScheme.primary)),
-            dense: true,
-            title: const Text("مرتب سازی"),
+            dense: false,
+            title: Text("مرتب سازی",
+                style: Theme.of(context).textTheme.labelLarge),
             maintainState: false,
             children: SortBy.values.map<Widget>((x) {
               return RadioListTile(
                   dense: true,
                   value: x,
-                  title:  Text(x.toName()),
+                  title: Text(x.toName(),
+                      style: Theme.of(context).textTheme.labelMedium),
                   groupValue: state.tempSortBy,
                   onChanged: (value) {
                     BlocProvider.of<SortBySectionCubit>(context).set(value);

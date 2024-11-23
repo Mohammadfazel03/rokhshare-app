@@ -72,7 +72,7 @@ class _UserPageState extends State<UserPage>
                               ? ThemeMode.dark
                               : ThemeMode.light);
                     },
-                    title: const Text("زمینه تیره"),
+                    title: Text("زمینه تیره", style: Theme.of(context).textTheme.labelLarge),
                     shape: Border.symmetric(
                         horizontal: BorderSide(
                             width: 0.5,
@@ -96,7 +96,7 @@ class _UserPageState extends State<UserPage>
                                 .colorScheme
                                 .onSurface,
                         BlendMode.srcIn)),
-                title: const Text("سوالات متداول"),
+                title: Text("سوالات متداول", style: Theme.of(context).textTheme.labelLarge),
                 shape: Border.symmetric(
                     horizontal: BorderSide(
                         width: 0.5,
@@ -118,7 +118,7 @@ class _UserPageState extends State<UserPage>
                                 .colorScheme
                                 .onSurface,
                         BlendMode.srcIn)),
-                title: const Text("درباره ما"),
+                title: Text("درباره ما", style: Theme.of(context).textTheme.labelLarge),
                 shape: Border.symmetric(
                     horizontal: BorderSide(
                         width: 0.5,
@@ -143,7 +143,7 @@ class _UserPageState extends State<UserPage>
                                   .onSurface,
                           BlendMode.srcIn)),
                 ),
-                title: const Text("تماس با ما"),
+                title: Text("تماس با ما", style: Theme.of(context).textTheme.labelLarge),
                 shape: Border.symmetric(
                     horizontal: BorderSide(
                         width: 0.5,

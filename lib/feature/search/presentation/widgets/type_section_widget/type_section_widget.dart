@@ -27,10 +27,10 @@ class _TypeSectionWidgetState extends State<TypeSectionWidget> {
           children: MediaType.values.map<Widget>((x) {
             return Flexible(
               child: CheckboxListTile(
-
-                  title: Text(x.toName()),
+                  title: Text(x.toName(),
+                      style: Theme.of(context).textTheme.labelLarge),
                   controlAffinity: ListTileControlAffinity.leading,
-                  dense: true,
+                  dense: false,
                   value: state.tempSelectedItem.contains(x),
                   onChanged: (value) {
                     if (value == true) {

@@ -74,6 +74,7 @@ class _MainBottomNavigationBarState extends State<MainBottomNavigationBar> {
                             duration: 200.ms,
                             end: const Offset(0, 0),
                             begin: const Offset(0, 8)),
+                    const SizedBox(height: 2),
                     Text("خانه", style: Theme.of(context).textTheme.labelMedium)
                         .animate(target: _currentPageIndex == 1 ? 1 : 0)
                         .fadeIn(begin: 0, duration: 200.ms)
@@ -127,6 +128,7 @@ class _MainBottomNavigationBarState extends State<MainBottomNavigationBar> {
                             duration: 200.ms,
                             end: const Offset(0, 0),
                             begin: const Offset(0, 8)),
+                    const SizedBox(height: 2),
                     Text("جستجو",
                             style: Theme.of(context).textTheme.labelMedium)
                         .animate(target: _currentPageIndex == 2 ? 1 : 0)
@@ -180,6 +182,7 @@ class _MainBottomNavigationBarState extends State<MainBottomNavigationBar> {
                             duration: 200.ms,
                             end: const Offset(0, 0),
                             begin: const Offset(0, 8)),
+                    const SizedBox(height: 2),
                     Text("دسته‌بندی",
                             style: Theme.of(context).textTheme.labelMedium)
                         .animate(target: _currentPageIndex == 3 ? 1 : 0)
@@ -233,6 +236,7 @@ class _MainBottomNavigationBarState extends State<MainBottomNavigationBar> {
                             duration: 200.ms,
                             end: const Offset(0, 0),
                             begin: const Offset(0, 8)),
+                    const SizedBox(height: 2),
                     Text("حساب من",
                             style: Theme.of(context).textTheme.labelMedium)
                         .animate(target: _currentPageIndex == 4 ? 1 : 0)

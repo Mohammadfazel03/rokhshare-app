@@ -134,6 +134,10 @@ class _LoginTextFieldState extends State<LoginTextField> {
       controller: widget.controller,
       focusNode: widget.focusNode,
       decoration: InputDecoration(
+        floatingLabelStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
+          color: Theme.of(context).colorScheme.primary
+        ),
+          labelStyle: Theme.of(context).textTheme.labelMedium,
           label: Text(widget.label),
           prefixIcon: Padding(
             padding: const EdgeInsets.all(8),
@@ -148,7 +152,8 @@ class _LoginTextFieldState extends State<LoginTextField> {
               child: widget.leadingIcon,
             ),
           ),
-          prefixIconConstraints: const BoxConstraints(maxWidth: 40, maxHeight: 40),
+          prefixIconConstraints:
+              const BoxConstraints(maxWidth: 40, maxHeight: 40),
           isDense: true,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(8))),
     );

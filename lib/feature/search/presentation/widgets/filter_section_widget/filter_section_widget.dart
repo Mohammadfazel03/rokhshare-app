@@ -31,8 +31,9 @@ class _FilterSectionWidgetState extends State<FilterSectionWidget> {
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
         appBar: AppBar(
-          title:
-              Text("فیلترها", style: Theme.of(context).textTheme.headlineSmall),
+          title: Text("فیلتر ها", style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.w700
+          )),
           backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
           actions: [
             Builder(builder: (context) {
@@ -104,8 +105,9 @@ class _FilterSectionWidgetState extends State<FilterSectionWidget> {
                     horizontal: BorderSide(
                         width: 0.5,
                         color: Theme.of(context).colorScheme.primary)),
-                dense: true,
-                title: const Text("ژانر ها"),
+                dense: false,
+                title: Text("ژانر ها",
+                    style: Theme.of(context).textTheme.labelLarge),
                 maintainState: true,
                 children: const [GenreFilterSectionWidget()],
               ),
@@ -118,8 +120,9 @@ class _FilterSectionWidgetState extends State<FilterSectionWidget> {
                     horizontal: BorderSide(
                         width: 0.5,
                         color: Theme.of(context).colorScheme.primary)),
-                dense: true,
-                title: const Text("کشور ها"),
+                dense: false,
+                title: Text("کشور ها",
+                    style: Theme.of(context).textTheme.labelLarge),
                 maintainState: true,
                 children: const [CountryFilterSectionWidget()],
               ),
@@ -186,6 +189,7 @@ class _FilterSectionWidgetState extends State<FilterSectionWidget> {
                           }
                         : null,
                     style: ButtonStyle(
+                      textStyle: WidgetStatePropertyAll(Theme.of(context).textTheme.labelLarge),
                         shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)))),
                     child: const Text("اعمال فیلتر"),

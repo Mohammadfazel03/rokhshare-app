@@ -42,7 +42,9 @@ class _MediaItemsPageState extends State<MediaItemsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(widget.title, style: TextStyle(fontWeight: FontWeight.bold),),
+          title: Text(widget.title, style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w700
+          )),
           centerTitle: true,
           surfaceTintColor: Theme.of(context).colorScheme.surfaceTint),
       body: (categoryId == null && collectionId == null) ||

@@ -32,7 +32,7 @@ class CollectionSliderWidget extends StatelessWidget {
                         Text(collection.name ?? "",
                             style: Theme.of(context)
                                 .textTheme
-                                .titleLarge
+                                .titleMedium
                                 ?.copyWith(fontWeight: FontWeight.bold)),
                         GestureDetector(
                           onTap: () {
@@ -119,6 +119,7 @@ class _MovieItemState extends State<MovieItem> {
                         widget.media.name ?? "",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.labelMedium,
                       ))
                 ]),
           ),

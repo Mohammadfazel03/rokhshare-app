@@ -46,11 +46,13 @@ class CustomErrorWidget extends StatelessWidget {
               ]
             ],
             if (showTitle && error.title != null) ...[
-              Text(error.title!),
+              Text(error.title!, style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                fontWeight: FontWeight.w700
+              )),
               const SizedBox(height: 4),
             ],
             if (showMessage) ...[
-              Text(error.error),
+              Text(error.error, style: Theme.of(context).textTheme.bodySmall),
             ],
             if (showButton) ...[
               if (retryButton != null) ...[
