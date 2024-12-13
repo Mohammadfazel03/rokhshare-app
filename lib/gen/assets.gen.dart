@@ -23,6 +23,21 @@ class $AssetsIconsGen {
   SvgGenImage get arrowRightLinear =>
       const SvgGenImage('assets/icons/arrow_right_linear.svg');
 
+  /// File path: assets/icons/bell_bold.svg
+  SvgGenImage get bellBold => const SvgGenImage('assets/icons/bell_bold.svg');
+
+  /// File path: assets/icons/bill_list_bold.svg
+  SvgGenImage get billListBold =>
+      const SvgGenImage('assets/icons/bill_list_bold.svg');
+
+  /// File path: assets/icons/bookmark_bold.svg
+  SvgGenImage get bookmarkBold =>
+      const SvgGenImage('assets/icons/bookmark_bold.svg');
+
+  /// File path: assets/icons/bookmark_outline.svg
+  SvgGenImage get bookmarkOutline =>
+      const SvgGenImage('assets/icons/bookmark_outline.svg');
+
   /// File path: assets/icons/category_outline.svg
   SvgGenImage get categoryOutline =>
       const SvgGenImage('assets/icons/category_outline.svg');
@@ -31,9 +46,24 @@ class $AssetsIconsGen {
   SvgGenImage get categorySharp =>
       const SvgGenImage('assets/icons/category_sharp.svg');
 
+  /// File path: assets/icons/circualr_bookmark_bold.svg
+  SvgGenImage get circualrBookmarkBold =>
+      const SvgGenImage('assets/icons/circualr_bookmark_bold.svg');
+
+  /// File path: assets/icons/circualr_bookmark_outline.svg
+  SvgGenImage get circualrBookmarkOutline =>
+      const SvgGenImage('assets/icons/circualr_bookmark_outline.svg');
+
   /// File path: assets/icons/filter_bold.svg
   SvgGenImage get filterBold =>
       const SvgGenImage('assets/icons/filter_bold.svg');
+
+  /// File path: assets/icons/heart_bold.svg
+  SvgGenImage get heartBold => const SvgGenImage('assets/icons/heart_bold.svg');
+
+  /// File path: assets/icons/heart_outline.svg
+  SvgGenImage get heartOutline =>
+      const SvgGenImage('assets/icons/heart_outline.svg');
 
   /// File path: assets/icons/image_broken.svg
   SvgGenImage get imageBroken =>
@@ -47,9 +77,21 @@ class $AssetsIconsGen {
   SvgGenImage get letterBold =>
       const SvgGenImage('assets/icons/letter-bold.svg');
 
+  /// File path: assets/icons/list_heart_minimalist_bold.svg
+  SvgGenImage get listHeartMinimalistBold =>
+      const SvgGenImage('assets/icons/list_heart_minimalist_bold.svg');
+
   /// File path: assets/icons/lock-keyhole-bold.svg
   SvgGenImage get lockKeyholeBold =>
       const SvgGenImage('assets/icons/lock-keyhole-bold.svg');
+
+  /// File path: assets/icons/logout-bold.svg
+  SvgGenImage get logoutBold =>
+      const SvgGenImage('assets/icons/logout-bold.svg');
+
+  /// File path: assets/icons/logout_outline.svg
+  SvgGenImage get logoutOutline =>
+      const SvgGenImage('assets/icons/logout_outline.svg');
 
   /// File path: assets/icons/magnifer_linear.svg
   SvgGenImage get magniferLinear =>
@@ -85,6 +127,14 @@ class $AssetsIconsGen {
   /// File path: assets/icons/sun-bold.svg
   SvgGenImage get sunBold => const SvgGenImage('assets/icons/sun-bold.svg');
 
+  /// File path: assets/icons/ticket_star_bold.svg
+  SvgGenImage get ticketStarBold =>
+      const SvgGenImage('assets/icons/ticket_star_bold.svg');
+
+  /// File path: assets/icons/unread_notification_bold.svg
+  SvgGenImage get unreadNotificationBold =>
+      const SvgGenImage('assets/icons/unread_notification_bold.svg');
+
   /// File path: assets/icons/user-circle-bold.svg
   SvgGenImage get userCircleBold =>
       const SvgGenImage('assets/icons/user-circle-bold.svg');
@@ -116,13 +166,24 @@ class $AssetsIconsGen {
   List<SvgGenImage> get values => [
         arrowLeftLinear,
         arrowRightLinear,
+        bellBold,
+        billListBold,
+        bookmarkBold,
+        bookmarkOutline,
         categoryOutline,
         categorySharp,
+        circualrBookmarkBold,
+        circualrBookmarkOutline,
         filterBold,
+        heartBold,
+        heartOutline,
         imageBroken,
         infoCircleBold,
         letterBold,
+        listHeartMinimalistBold,
         lockKeyholeBold,
+        logoutBold,
+        logoutOutline,
         magniferLinear,
         moonBold,
         phoneRoundedBold,
@@ -132,6 +193,8 @@ class $AssetsIconsGen {
         roundedMagniferOutline,
         roundedMagniferSharp,
         sunBold,
+        ticketStarBold,
+        unreadNotificationBold,
         userCircleBold,
         userOutline,
         userRoundedOutline,
@@ -144,6 +207,10 @@ class $AssetsIconsGen {
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
+
+  /// File path: assets/images/confirm_email_box.png
+  AssetGenImage get confirmEmailBox =>
+      const AssetGenImage('assets/images/confirm_email_box.png');
 
   /// File path: assets/images/error_emote.svg
   SvgGenImage get errorEmote =>
@@ -182,6 +249,7 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<dynamic> get values => [
+        confirmEmailBox,
         errorEmote,
         loginFrameDark,
         loginFrameLight,

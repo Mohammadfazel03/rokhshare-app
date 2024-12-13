@@ -41,63 +41,63 @@ class Themes {
       ),
       textTheme: const TextTheme(
           displayLarge: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w400,
               fontSize: 57),
           displayMedium: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w400,
               fontSize: 45),
           displaySmall: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w400,
               fontSize: 36),
           headlineLarge: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w400,
               fontSize: 32),
           headlineMedium: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w400,
               fontSize: 28),
           headlineSmall: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w400,
               fontSize: 24),
           titleLarge: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w400,
               fontSize: 22),
           titleMedium: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w500,
               fontSize: 16),
           titleSmall: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w500,
               fontSize: 14),
           bodyLarge: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w400,
               fontSize: 16),
           bodyMedium: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w400,
               fontSize: 14),
           bodySmall: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w400,
               fontSize: 12),
           labelLarge: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w500,
               fontSize: 14),
           labelMedium: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w500,
               fontSize: 12),
           labelSmall: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w500,
               fontSize: 11)));
 
@@ -141,63 +141,63 @@ class Themes {
       ),
       textTheme: const TextTheme(
           displayLarge: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w400,
               fontSize: 57),
           displayMedium: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w400,
               fontSize: 45),
           displaySmall: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w400,
               fontSize: 36),
           headlineLarge: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w400,
               fontSize: 32),
           headlineMedium: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w400,
               fontSize: 28),
           headlineSmall: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w400,
               fontSize: 24),
           titleLarge: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w400,
               fontSize: 22),
           titleMedium: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w500,
               fontSize: 16),
           titleSmall: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w500,
               fontSize: 14),
           bodyLarge: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w400,
               fontSize: 16),
           bodyMedium: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w400,
               fontSize: 14),
           bodySmall: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w400,
               fontSize: 12),
           labelLarge: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w500,
               fontSize: 14),
           labelMedium: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w500,
               fontSize: 12),
           labelSmall: TextStyle(
-              fontFamily: FontFamily.pinar,
+              fontFamily: FontFamily.dana,
               fontWeight: FontWeight.w500,
               fontSize: 11)));
 }

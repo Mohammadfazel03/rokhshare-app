@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-const baseUrl = "http://192.168.1.3:8000/";
+const baseUrl = "http://192.168.27.1:8000/";
 
 
 Dio getDioConfiguration() {

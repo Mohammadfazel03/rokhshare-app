@@ -8,6 +8,7 @@ import 'config/theme/themes.dart';
 import 'feature/main/presentation/main_page.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await setup();
   runApp(const MyApp());
 }

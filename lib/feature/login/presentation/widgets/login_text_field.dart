@@ -86,13 +86,18 @@ class LoginTextField extends StatefulWidget {
   final TextEditingController controller;
   final String label;
   final Widget leadingIcon;
+  final bool obscureText;
+  final bool readOnly;
+  final String obscuringCharacter;
 
-  LoginTextField(
-      {super.key,
-      FocusNode? focusNode,
-      required this.controller,
-      required this.label,
-      required this.leadingIcon})
+  LoginTextField({super.key,
+    this.obscureText = false,
+    this.readOnly = false,
+    this.obscuringCharacter = '.',
+    FocusNode? focusNode,
+    required this.controller,
+    required this.label,
+    required this.leadingIcon})
       : focusNode = focusNode ?? FocusNode();
 
   @override
@@ -131,13 +136,26 @@ class _LoginTextFieldState extends State<LoginTextField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      readOnly: widget.readOnly,
+      obscureText: widget.obscureText,
+      obscuringCharacter: widget.obscuringCharacter,
       controller: widget.controller,
       focusNode: widget.focusNode,
       decoration: InputDecoration(
-        floatingLabelStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
-          color: Theme.of(context).colorScheme.primary
-        ),
-          labelStyle: Theme.of(context).textTheme.labelMedium,
+          floatingLabelStyle: Theme
+              .of(context)
+              .textTheme
+              .labelLarge
+              ?.copyWith(
+              color: Theme
+                  .of(context)
+                  .colorScheme
+                  .primary
+          ),
+          labelStyle: Theme
+              .of(context)
+              .textTheme
+              .labelMedium,
           label: Text(widget.label),
           prefixIcon: Padding(
             padding: const EdgeInsets.all(8),
@@ -153,7 +171,7 @@ class _LoginTextFieldState extends State<LoginTextField> {
             ),
           ),
           prefixIconConstraints:
-              const BoxConstraints(maxWidth: 40, maxHeight: 40),
+          const BoxConstraints(maxWidth: 40, maxHeight: 40),
           isDense: true,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(8))),
     );
