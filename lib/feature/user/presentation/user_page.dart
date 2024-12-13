@@ -86,7 +86,9 @@ class _UserPageState extends State<UserPage>
                               Theme.of(context).colorScheme.surfaceContainer,
                           highlightColor:
                               Theme.of(context).colorScheme.surfaceContainerLow,
-                          child: Container(color: Colors.red, child: const Text("بدون اشتراک")))
+                          child: Container(
+                              color: Colors.red,
+                              child: const Text("بدون اشتراک")))
                       : Text(state.username ?? "",
                           style: Theme.of(context).textTheme.labelLarge),
                   shape: Border.symmetric(
@@ -117,10 +119,12 @@ class _UserPageState extends State<UserPage>
                               Theme.of(context).colorScheme.surfaceContainer,
                           highlightColor:
                               Theme.of(context).colorScheme.surfaceContainerLow,
-                          child: Container(padding: const EdgeInsets.all(6),
+                          child: Container(
+                              padding: const EdgeInsets.all(6),
                               decoration: BoxDecoration(
                                   color: Theme.of(context).colorScheme.surface,
-                                  borderRadius: BorderRadius.circular(4)), child: const Text("بدون اشتراک")))
+                                  borderRadius: BorderRadius.circular(4)),
+                              child: const Text("بدون اشتراک")))
                       : Container(
                           padding: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
@@ -199,8 +203,7 @@ class _UserPageState extends State<UserPage>
           ),
           Builder(
             builder: (context) {
-              var state =
-                  BlocProvider.of<ThemeCubit>(context, listen: true).state;
+              var state = Theme.of(context).colorScheme.brightness;
               return SwitchListTile(
                 secondary: Transform.flip(
                   flipX: true,
@@ -210,10 +213,10 @@ class _UserPageState extends State<UserPage>
                               Theme.of(context).colorScheme.onSurface,
                           BlendMode.srcIn)),
                 ),
-                value: state == ThemeMode.dark,
+                value: state == Brightness.dark,
                 onChanged: (value) {
                   BlocProvider.of<ThemeCubit>(context).changeTheme(
-                      state != ThemeMode.dark
+                      state != Brightness.dark
                           ? ThemeMode.dark
                           : ThemeMode.light);
                 },

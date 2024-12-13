@@ -7,6 +7,7 @@ enum LocalStorageKey {
   email("email"),
   username("username"),
   accessToken("accessToken"),
+  theme("theme"),
   refreshToken("refreshToken");
 
   final String key;
@@ -133,5 +134,20 @@ class LocalStorageService {
       _cache[LocalStorageKey.username.key] = res;
     }
     return res;
+  }
+
+  Future<bool?> isDark() async {
+    if (_cache.containsKey(LocalStorageKey.theme.key)) {
+      return (_cache[LocalStorageKey.theme.key]) as bool?;
+    }
+    var res = await _preferences.getBool(LocalStorageKey.theme.key);
+    if (res != null) {
+      _cache[LocalStorageKey.theme.key] = res;
+    }
+    return res;
+  }
+
+  Future<void> setThemeMode(bool isDark) async {
+    await _preferences.setBool(LocalStorageKey.theme.key, isDark);
   }
 }
