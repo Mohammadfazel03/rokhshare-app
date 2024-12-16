@@ -13,6 +13,9 @@ import 'package:rokhshare/feature/login/data/repositories/login_repository_impl.
 import 'package:rokhshare/feature/media_items/data/remote/media_items_api_service.dart';
 import 'package:rokhshare/feature/media_items/data/repositories/media_items_repository.dart';
 import 'package:rokhshare/feature/media_items/data/repositories/media_items_repository_impl.dart';
+import 'package:rokhshare/feature/plan/data/remote/plan_api_service.dart';
+import 'package:rokhshare/feature/plan/data/repositories/plan_repository.dart';
+import 'package:rokhshare/feature/plan/data/repositories/plan_repository_impl.dart';
 import 'package:rokhshare/feature/search/data/remote/search_api_service.dart';
 import 'package:rokhshare/feature/search/data/repositories/search_repository.dart';
 import 'package:rokhshare/feature/search/data/repositories/search_repository_impl.dart';
@@ -35,12 +38,19 @@ final getIt = GetIt.instance;
 
 Future<void> setup() async {
   // register local storage services
-  getIt.registerSingletonAsync<SharedPreferencesAsync>(() async => SharedPreferencesAsync());
-  getIt.registerSingletonWithDependencies<LocalStorageService>(() =>
-      LocalStorageService(preferences: getIt.get<SharedPreferencesAsync>()), dependsOn: [SharedPreferencesAsync]);
+  getIt.registerSingletonAsync<SharedPreferencesAsync>(
+      () async => SharedPreferencesAsync());
+  getIt.registerSingletonWithDependencies<LocalStorageService>(
+      () =>
+          LocalStorageService(preferences: getIt.get<SharedPreferencesAsync>()),
+      dependsOn: [SharedPreferencesAsync]);
 
   // register remote services
-  getIt.registerSingleton<Dio>(getDioConfiguration());
+  getIt.registerSingletonWithDependencies<Dio>(
+      () => getDioConfiguration(getIt.get()),
+      dependsOn: [LocalStorageService]);
+
+  await getIt.allReady();
 
   getIt.registerSingleton<HomeApiService>(HomeApiService(dio: getIt.get()));
   getIt.registerSingleton<HomeRepository>(
@@ -70,11 +80,15 @@ Future<void> setup() async {
   getIt.registerLazySingleton<SignupRepository>(
       () => SignupRepositoryImpl(apiService: getIt.get()));
 
-
   getIt.registerLazySingleton<AuthApiService>(
       () => AuthApiService(dio: getIt.get()));
   getIt.registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(apiService: getIt.get()));
+
+  getIt.registerLazySingleton<PlanApiService>(
+      () => PlanApiService(dio: getIt.get()));
+  getIt.registerLazySingleton<PlanRepository>(
+      () => PlanRepositoryImpl(apiService: getIt.get()));
 
   // register bloc
   getIt.registerLazySingleton<GenreFilterSectionCubit>(
@@ -89,6 +103,4 @@ Future<void> setup() async {
   getIt.registerLazySingleton<SortBySectionCubit>(() => SortBySectionCubit());
 
   getIt.registerLazySingleton<TypeSectionCubit>(() => TypeSectionCubit());
-
-  await getIt.allReady();
 }

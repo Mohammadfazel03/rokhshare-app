@@ -27,15 +27,23 @@ class AuthState {
       this.isLogin = false,
       this.status = AuthStatus.init});
 
-  // AuthState copyWith({
-  //   String? refresh,
-  //   String? access,
-  //   String? email,
-  //   int? days,
-  //   bool? isPremium
-  // }) {
-  //   return AuthState(
-  //     refresh: refresh ?? this.refresh,
-  //   );
-  // }
+  AuthState copyWith({
+    String? email,
+    String? username,
+    int? days,
+    bool? isPremium,
+    bool? isLogin,
+    AuthStatus? status,
+    ErrorEntity? error,
+  }) {
+    return AuthState(
+      email: email ?? this.email,
+      username: username ?? this.username,
+      days: days ?? this.days,
+      isPremium: isPremium ?? this.isPremium,
+      isLogin: isLogin ?? this.isLogin,
+      status: status ?? this.status,
+      error: error ?? this.error,
+    );
+  }
 }

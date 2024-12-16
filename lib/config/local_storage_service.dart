@@ -37,6 +37,11 @@ class LocalStorageService {
     }
   }
 
+  Future<void> setPremium(int days) async {
+    await _preferences.setBool(LocalStorageKey.isPremium.key, true);
+    await _preferences.setInt(LocalStorageKey.days.key, days);
+  }
+
   Future<void> updateAccessToken(String accessToken) async {
     _cache.remove(LocalStorageKey.accessToken.key);
     await _preferences.setString(LocalStorageKey.accessToken.key, accessToken);

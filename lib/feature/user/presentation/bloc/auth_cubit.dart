@@ -40,8 +40,13 @@ class AuthCubit extends Cubit<AuthState> {
           isPremium: await localStorageService.isPremium(),
         ));
       } else {
-        login(response.data!.access!, refresh, response.data!.isPremium!,
-            response.data!.days, response.data!.email!, response.data!.username!);
+        login(
+            response.data!.access!,
+            refresh,
+            response.data!.isPremium!,
+            response.data!.days,
+            response.data!.email!,
+            response.data!.username!);
       }
     } else {
       emit(AuthState(status: AuthStatus.success));
@@ -64,5 +69,10 @@ class AuthCubit extends Cubit<AuthState> {
   void logout() {
     localStorageService.logout();
     emit(AuthState(isLogin: false, status: AuthStatus.success));
+  }
+
+  void premium(int days) {
+    localStorageService.setPremium(days);
+    emit(state.copyWith(isPremium: true, days: days));
   }
 }

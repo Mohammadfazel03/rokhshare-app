@@ -4,6 +4,8 @@ import 'package:rokhshare/config/dependency_injection.dart';
 import 'package:rokhshare/config/theme/theme_cubit.dart';
 import 'package:rokhshare/feature/login/presentation/bloc/login_cubit.dart';
 import 'package:rokhshare/feature/login/presentation/login_page.dart';
+import 'package:rokhshare/feature/plan/presentation/bloc/plan_cubit.dart';
+import 'package:rokhshare/feature/plan/presentation/plan_page.dart';
 import 'package:rokhshare/feature/user/presentation/bloc/auth_cubit.dart';
 import 'package:rokhshare/feature/user/presentation/bloc/auth_state.dart';
 import 'package:rokhshare/gen/assets.gen.dart';
@@ -105,7 +107,24 @@ class _UserPageState extends State<UserPage>
             builder: (context, state) {
               if (state.isLogin == true) {
                 return ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    if (state.error != null) {
+                      BlocProvider.of<AuthCubit>(context).init();
+                    } else if (state.isPremium != true) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => MultiBlocProvider(
+                                providers: [
+                                  BlocProvider(
+                                      create: (context) =>
+                                          PlanCubit(repository: getIt.get())),
+                                  BlocProvider.value(
+                                      value:
+                                          BlocProvider.of<AuthCubit>(context))
+                                ],
+                                child: PlanPage(username: state.username),
+                              )));
+                    }
+                  },
                   leading: Assets.icons.ticketStarBold.svg(
                       colorFilter: ColorFilter.mode(
                           Theme.of(context).iconTheme.color ??

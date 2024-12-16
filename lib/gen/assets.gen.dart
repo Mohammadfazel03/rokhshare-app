@@ -46,6 +46,9 @@ class $AssetsIconsGen {
   SvgGenImage get categorySharp =>
       const SvgGenImage('assets/icons/category_sharp.svg');
 
+  /// File path: assets/icons/check_bold.svg
+  SvgGenImage get checkBold => const SvgGenImage('assets/icons/check_bold.svg');
+
   /// File path: assets/icons/circualr_bookmark_bold.svg
   SvgGenImage get circualrBookmarkBold =>
       const SvgGenImage('assets/icons/circualr_bookmark_bold.svg');
@@ -57,6 +60,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/filter_bold.svg
   SvgGenImage get filterBold =>
       const SvgGenImage('assets/icons/filter_bold.svg');
+
+  /// File path: assets/icons/headphone_bold.svg
+  SvgGenImage get headphoneBold =>
+      const SvgGenImage('assets/icons/headphone_bold.svg');
 
   /// File path: assets/icons/heart_bold.svg
   SvgGenImage get heartBold => const SvgGenImage('assets/icons/heart_bold.svg');
@@ -127,6 +134,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/sun-bold.svg
   SvgGenImage get sunBold => const SvgGenImage('assets/icons/sun-bold.svg');
 
+  /// File path: assets/icons/ticket_bold_duotone.svg
+  SvgGenImage get ticketBoldDuotone =>
+      const SvgGenImage('assets/icons/ticket_bold_duotone.svg');
+
   /// File path: assets/icons/ticket_star_bold.svg
   SvgGenImage get ticketStarBold =>
       const SvgGenImage('assets/icons/ticket_star_bold.svg');
@@ -172,9 +183,11 @@ class $AssetsIconsGen {
         bookmarkOutline,
         categoryOutline,
         categorySharp,
+        checkBold,
         circualrBookmarkBold,
         circualrBookmarkOutline,
         filterBold,
+        headphoneBold,
         heartBold,
         heartOutline,
         imageBroken,
@@ -193,6 +206,7 @@ class $AssetsIconsGen {
         roundedMagniferOutline,
         roundedMagniferSharp,
         sunBold,
+        ticketBoldDuotone,
         ticketStarBold,
         unreadNotificationBold,
         userCircleBold,
