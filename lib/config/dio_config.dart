@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:rokhshare/config/local_storage_service.dart';
 
-const baseUrl = "http://192.168.27.1:8000/";
+const baseUrl = "http://192.168.1.5:8000/";
 
 class DioInterceptor extends Interceptor {
   final Dio _dio;

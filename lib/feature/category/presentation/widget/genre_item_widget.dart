@@ -7,6 +7,7 @@ import 'package:rokhshare/config/dependency_injection.dart';
 import 'package:rokhshare/feature/home/data/remote/model/genre.dart';
 import 'package:rokhshare/feature/media_items/presentation/bloc/media_items_cubit.dart';
 import 'package:rokhshare/feature/media_items/presentation/media_items_page.dart';
+import 'package:rokhshare/feature/user/presentation/bloc/auth_cubit.dart';
 
 class GenreItemWidget extends StatefulWidget {
   final Genre genre;
@@ -33,12 +34,17 @@ class _GenreItemWidgetState extends State<GenreItemWidget> {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => BlocProvider(
-                  create: (context) => MediaItemsCubit(repository: getIt.get()),
-                  child: MediaItemsPage(
-                      title: widget.genre.title ?? "",
-                      categoryId: widget.genre.id),
-                )));
+            builder: (_) => MultiBlocProvider(
+                    providers: [
+                      BlocProvider(
+                          create: (context) =>
+                              MediaItemsCubit(repository: getIt.get())),
+                      BlocProvider.value(
+                          value: BlocProvider.of<AuthCubit>(context))
+                    ],
+                    child: MediaItemsPage(
+                        title: widget.genre.title ?? "",
+                        categoryId: widget.genre.id))));
       },
       onTapDown: (_) {
         _changeScaleDown();
@@ -67,7 +73,7 @@ class _GenreItemWidgetState extends State<GenreItemWidget> {
                       filter: ImageFilter.blur(sigmaX: 0.5, sigmaY: 0.5),
                       child: DecoratedBox(
                           decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.4))))),
+                              color: Colors.black.withAlpha((0.4 * 255).round()))))),
               // Positioned.fill(
               //     child: ),
               Center(

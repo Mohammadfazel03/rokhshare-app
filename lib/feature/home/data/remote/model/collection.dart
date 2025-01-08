@@ -49,17 +49,4 @@ class Collection {
   String? get lastUpdate => _lastUpdate;
 
   List<Media>? get media => _media;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = _id;
-    map['name'] = _name;
-    map['created_at'] = _createdAt;
-    map['poster'] = _poster;
-    map['last_update'] = _lastUpdate;
-    if (_media != null) {
-      map['media'] = _media?.map((v) => v.toJson()).toList();
-    }
-    return map;
-  }
 }

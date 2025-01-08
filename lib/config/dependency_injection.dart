@@ -10,6 +10,9 @@ import 'package:rokhshare/feature/home/data/repositories/home_repository_impl.da
 import 'package:rokhshare/feature/login/data/remote/login_api_service.dart';
 import 'package:rokhshare/feature/login/data/repositories/login_repository.dart';
 import 'package:rokhshare/feature/login/data/repositories/login_repository_impl.dart';
+import 'package:rokhshare/feature/media/data/remote/media_api_service.dart';
+import 'package:rokhshare/feature/media/data/repositories/media_repository.dart';
+import 'package:rokhshare/feature/media/data/repositories/media_repository_impl.dart';
 import 'package:rokhshare/feature/media_items/data/remote/media_items_api_service.dart';
 import 'package:rokhshare/feature/media_items/data/repositories/media_items_repository.dart';
 import 'package:rokhshare/feature/media_items/data/repositories/media_items_repository_impl.dart';
@@ -89,6 +92,11 @@ Future<void> setup() async {
       () => PlanApiService(dio: getIt.get()));
   getIt.registerLazySingleton<PlanRepository>(
       () => PlanRepositoryImpl(apiService: getIt.get()));
+
+  getIt.registerLazySingleton<MediaApiService>(
+      () => MediaApiService(dio: getIt.get()));
+  getIt.registerLazySingleton<MediaRepository>(
+      () => MediaRepositoryImpl(apiService: getIt.get()));
 
   // register bloc
   getIt.registerLazySingleton<GenreFilterSectionCubit>(

@@ -56,18 +56,4 @@ class SliderModel {
   String? get poster => _poster;
 
   num? get rating => _rating;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = _id;
-    if (_media != null) {
-      map['media'] = _media?.toJson();
-    }
-    map['description'] = _description;
-    map['title'] = _title;
-    map['priority'] = _priority;
-    map['thumbnail'] = _thumbnail;
-    map['poster'] = _poster;
-    return map;
-  }
 }

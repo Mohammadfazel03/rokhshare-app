@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rokhshare/config/dependency_injection.dart';
 import 'package:rokhshare/feature/home/data/remote/model/media.dart';
+import 'package:rokhshare/feature/media/presentation/bloc/media_cubit.dart';
+import 'package:rokhshare/feature/media/presentation/media_page.dart';
 import 'package:rokhshare/feature/search/presentation/bloc/search_cubit.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/country_filter_section_widget/bloc/country_filter_section_cubit.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/date_filter_section_widget/bloc/date_filter_section_cubit.dart';
@@ -11,6 +13,7 @@ import 'package:rokhshare/feature/search/presentation/widgets/genre_filter_secti
 import 'package:rokhshare/feature/search/presentation/widgets/search_field_widget.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/sort_by_section_widget/bloc/sort_by_section_cubit.dart';
 import 'package:rokhshare/feature/search/presentation/widgets/type_section_widget/bloc/type_section_cubit.dart';
+import 'package:rokhshare/feature/user/presentation/bloc/auth_cubit.dart';
 import 'package:rokhshare/gen/assets.gen.dart';
 import 'package:rokhshare/utils/error_widget.dart';
 
@@ -280,6 +283,15 @@ class _MovieItemState extends State<MovieItem> {
       },
       onTapCancel: () {
         _changeScaleUp();
+      },
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (_) => MultiBlocProvider(providers: [
+              BlocProvider(
+                create: (context) => MediaCubit(repository: getIt.get())
+              ),
+              BlocProvider.value(value: BlocProvider.of<AuthCubit>(context))
+            ], child: MediaPage(mediaId: widget.media.id!))));
       },
       child: AnimatedScale(
         scale: scale,

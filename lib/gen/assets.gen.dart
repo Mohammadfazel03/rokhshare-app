@@ -61,6 +61,10 @@ class $AssetsIconsGen {
   SvgGenImage get filterBold =>
       const SvgGenImage('assets/icons/filter_bold.svg');
 
+  /// File path: assets/icons/gallery_bold.svg
+  SvgGenImage get galleryBold =>
+      const SvgGenImage('assets/icons/gallery_bold.svg');
+
   /// File path: assets/icons/headphone_bold.svg
   SvgGenImage get headphoneBold =>
       const SvgGenImage('assets/icons/headphone_bold.svg');
@@ -111,6 +115,9 @@ class $AssetsIconsGen {
   SvgGenImage get phoneRoundedBold =>
       const SvgGenImage('assets/icons/phone-rounded-bold.svg');
 
+  /// File path: assets/icons/play_bold.svg
+  SvgGenImage get playBold => const SvgGenImage('assets/icons/play_bold.svg');
+
   /// File path: assets/icons/question-circle-bold.svg
   SvgGenImage get questionCircleBold =>
       const SvgGenImage('assets/icons/question-circle-bold.svg');
@@ -131,6 +138,23 @@ class $AssetsIconsGen {
   SvgGenImage get roundedMagniferSharp =>
       const SvgGenImage('assets/icons/rounded_magnifer_sharp.svg');
 
+  /// File path: assets/icons/send_bold.svg
+  SvgGenImage get sendBold => const SvgGenImage('assets/icons/send_bold.svg');
+
+  /// File path: assets/icons/share-bold.svg
+  SvgGenImage get shareBold => const SvgGenImage('assets/icons/share-bold.svg');
+
+  /// File path: assets/icons/share-linear.svg
+  SvgGenImage get shareLinear =>
+      const SvgGenImage('assets/icons/share-linear.svg');
+
+  /// File path: assets/icons/star-bold.svg
+  SvgGenImage get starBold => const SvgGenImage('assets/icons/star-bold.svg');
+
+  /// File path: assets/icons/star-linear.svg
+  SvgGenImage get starLinear =>
+      const SvgGenImage('assets/icons/star-linear.svg');
+
   /// File path: assets/icons/sun-bold.svg
   SvgGenImage get sunBold => const SvgGenImage('assets/icons/sun-bold.svg');
 
@@ -149,6 +173,14 @@ class $AssetsIconsGen {
   /// File path: assets/icons/user-circle-bold.svg
   SvgGenImage get userCircleBold =>
       const SvgGenImage('assets/icons/user-circle-bold.svg');
+
+  /// File path: assets/icons/user_circle_duotone.svg
+  SvgGenImage get userCircleDuotone =>
+      const SvgGenImage('assets/icons/user_circle_duotone.svg');
+
+  /// File path: assets/icons/user_circle_linear.svg
+  SvgGenImage get userCircleLinear =>
+      const SvgGenImage('assets/icons/user_circle_linear.svg');
 
   /// File path: assets/icons/user_outline.svg
   SvgGenImage get userOutline =>
@@ -187,6 +219,7 @@ class $AssetsIconsGen {
         circualrBookmarkBold,
         circualrBookmarkOutline,
         filterBold,
+        galleryBold,
         headphoneBold,
         heartBold,
         heartOutline,
@@ -200,16 +233,24 @@ class $AssetsIconsGen {
         magniferLinear,
         moonBold,
         phoneRoundedBold,
+        playBold,
         questionCircleBold,
         reelLinear,
         restartLinear,
         roundedMagniferOutline,
         roundedMagniferSharp,
+        sendBold,
+        shareBold,
+        shareLinear,
+        starBold,
+        starLinear,
         sunBold,
         ticketBoldDuotone,
         ticketStarBold,
         unreadNotificationBold,
         userCircleBold,
+        userCircleDuotone,
+        userCircleLinear,
         userOutline,
         userRoundedOutline,
         userSharp,
@@ -261,6 +302,10 @@ class $AssetsImagesGen {
   AssetGenImage get walkingDead =>
       const AssetGenImage('assets/images/walking_dead.jpg');
 
+  /// File path: assets/images/walking_dead_thumb.jpg
+  AssetGenImage get walkingDeadThumb =>
+      const AssetGenImage('assets/images/walking_dead_thumb.jpg');
+
   /// List of all assets
   List<dynamic> get values => [
         confirmEmailBox,
@@ -272,7 +317,8 @@ class $AssetsImagesGen {
         loginLogoLight,
         loginTv,
         test,
-        walkingDead
+        walkingDead,
+        walkingDeadThumb
       ];
 }
 
@@ -313,7 +359,7 @@ class AssetGenImage {
     ImageRepeat repeat = ImageRepeat.noRepeat,
     Rect? centerSlice,
     bool matchTextDirection = false,
-    bool gaplessPlayback = false,
+    bool gaplessPlayback = true,
     bool isAntiAlias = false,
     String? package,
     FilterQuality filterQuality = FilterQuality.low,

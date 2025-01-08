@@ -41,14 +41,18 @@ class CustomErrorWidget extends StatelessWidget {
                 Assets.icons.wifiLowBound.svg(
                     width: 128,
                     height: 128,
-                    color: Theme.of(context).colorScheme.primary),
+                    colorFilter: ColorFilter.mode(
+                        Theme.of(context).colorScheme.primary,
+                        BlendMode.srcIn)),
                 const SizedBox(height: 8)
               ]
             ],
             if (showTitle && error.title != null) ...[
-              Text(error.title!, style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                fontWeight: FontWeight.w700
-              )),
+              Text(error.title!,
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelLarge
+                      ?.copyWith(fontWeight: FontWeight.w700)),
               const SizedBox(height: 4),
             ],
             if (showMessage) ...[

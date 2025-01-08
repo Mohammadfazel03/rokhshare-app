@@ -3,7 +3,12 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rokhshare/config/dependency_injection.dart';
 import 'package:rokhshare/feature/home/data/remote/model/slider_model.dart';
+import 'package:rokhshare/feature/media/presentation/bloc/media_cubit.dart';
+import 'package:rokhshare/feature/media/presentation/media_page.dart';
+import 'package:rokhshare/feature/user/presentation/bloc/auth_cubit.dart';
 
 class HomeSlider extends StatelessWidget {
   final List<SliderModel> sliders;
@@ -45,171 +50,185 @@ class _CarouselSliderItemState extends State<CarouselSliderItem>
     super.build(context);
     return ClipRRect(
       borderRadius: BorderRadius.circular(24),
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: CachedNetworkImage(
-              imageUrl: widget.item.poster ?? "",
-              imageBuilder: (c, provider) {
-                return Container(
-                  decoration: BoxDecoration(
-                      image:
-                          DecorationImage(image: provider, fit: BoxFit.fill)),
-                  clipBehavior: Clip.hardEdge,
-                  child: ImageFiltered(
-                      imageFilter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-                      child: ShaderMask(
-                        shaderCallback: (rect) {
-                          return LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Colors.black,
-                                Colors.black.withOpacity(0)
-                              ],
-                              stops: const [
-                                0.7,
-                                0.8
-                              ]).createShader(rect);
-                        },
-                        blendMode: BlendMode.dstOut,
-                        child: Image(image: provider, fit: BoxFit.fill),
-                      )),
-                );
-              },
-            ),
-          ),
-          Positioned(
-            top: 0,
-            right: 0,
-            left: 0,
-            child: DecoratedBox(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: <Color>[
-                    Color(0x99000000),
-                    Color(0x00000000),
-                  ],
-                  tileMode: TileMode.mirror,
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(24),
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 25, sigmaY: 25),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 9, horizontal: 16),
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white.withOpacity(0.16)
-                              : Colors.black.withOpacity(0.05),
-                          child: Text(
-                            "پرطرفدار",
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelMedium
-                                ?.copyWith(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(24),
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 25, sigmaY: 25),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 9, horizontal: 16),
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white.withOpacity(0.16)
-                              : Colors.black.withOpacity(0.05),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const Icon(Icons.star_border_rounded,
-                                  color: Colors.white, size: 18),
-                              Text(
-                                " ${widget.item.rating ?? "--"} ",
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelMedium
-                                    ?.copyWith(color: Colors.white),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => MultiBlocProvider(providers: [
+                    BlocProvider(
+                        create: (context) =>
+                            MediaCubit(repository: getIt.get())),
+                    BlocProvider.value(
+                        value: BlocProvider.of<AuthCubit>(context))
+                  ], child: MediaPage(mediaId: widget.item.media!.id!))));
+        },
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: CachedNetworkImage(
+                imageUrl: widget.item.poster ?? "",
+                imageBuilder: (c, provider) {
+                  return Container(
+                    decoration: BoxDecoration(
+                        image:
+                            DecorationImage(image: provider, fit: BoxFit.fill)),
+                    clipBehavior: Clip.hardEdge,
+                    child: ImageFiltered(
+                        imageFilter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+                        child: ShaderMask(
+                          shaderCallback: (rect) {
+                            return LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Colors.black,
+                                  Colors.black.withAlpha(0)
+                                ],
+                                stops: const [
+                                  0.7,
+                                  0.8
+                                ]).createShader(rect);
+                          },
+                          blendMode: BlendMode.dstOut,
+                          child: Image(image: provider, fit: BoxFit.fill),
+                        )),
+                  );
+                },
               ),
             ),
-          ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            left: 0,
-            child: DecoratedBox(
+            Positioned(
+              top: 0,
+              right: 0,
+              left: 0,
+              child: DecoratedBox(
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: <Color>[
+                      Color(0x99000000),
                       Color(0x00000000),
-                      Color(0xB3000000),
                     ],
                     tileMode: TileMode.mirror,
                   ),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(16),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        widget.item.title ?? widget.item.media?.name ?? "",
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
-                            ?.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w700),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      if (widget.item.description != widget.item.title &&
-                          widget.item.description != null &&
-                          widget.item.description != "") ...[
-                        const SizedBox(height: 4),
-                        Text(
-                          widget.item.description ?? "",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall
-                              ?.copyWith(color: Colors.white),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(24),
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 25, sigmaY: 25),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 9, horizontal: 16),
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white.withAlpha((0.16 * 255).round())
+                                    : Colors.black.withAlpha((0.05 * 255).round()),
+                            child: Text(
+                              "پرطرفدار",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium
+                                  ?.copyWith(color: Colors.white),
+                            ),
+                          ),
                         ),
-                      ]
+                      ),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(24),
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 25, sigmaY: 25),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 9, horizontal: 16),
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white.withAlpha((0.16 * 255).round())
+                                    : Colors.black.withAlpha((0.05 * 255).round()),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Icon(Icons.star_border_rounded,
+                                    color: Colors.white, size: 18),
+                                Text(
+                                  " ${widget.item.rating ?? "--"} ",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelMedium
+                                      ?.copyWith(color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
-                )),
-          ),
-        ],
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              left: 0,
+              child: DecoratedBox(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: <Color>[
+                        Color(0x00000000),
+                        Color(0xB3000000),
+                      ],
+                      tileMode: TileMode.mirror,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.item.title ?? widget.item.media?.name ?? "",
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium
+                              ?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        if (widget.item.description != widget.item.title &&
+                            widget.item.description != null &&
+                            widget.item.description != "") ...[
+                          const SizedBox(height: 4),
+                          Text(
+                            widget.item.description ?? "",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(color: Colors.white),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ]
+                      ],
+                    ),
+                  )),
+            ),
+          ],
+        ),
       ),
     );
   }

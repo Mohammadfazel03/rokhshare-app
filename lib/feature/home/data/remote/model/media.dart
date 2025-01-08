@@ -1,6 +1,11 @@
 import 'package:rokhshare/feature/home/data/remote/model/country.dart';
 import 'package:rokhshare/feature/home/data/remote/model/genre.dart';
 import 'package:rokhshare/feature/home/data/remote/model/media_file.dart';
+import 'package:rokhshare/feature/home/data/remote/model/series.dart';
+
+import 'cast.dart';
+import 'comment.dart';
+import 'movie.dart';
 
 class Media {
   Media({
@@ -14,17 +19,35 @@ class Media {
     String? poster,
     String? value,
     String? releaseDate,
+    List<Cast>? casts,
+    List<Comment>? comments,
+    double? rate,
+    bool? isMovie,
+    int? myRate,
+    int? totalComments,
+    bool? isPremium,
+    Movie? movie,
+    Series? series,
   }) {
     _id = id;
     _genres = genres;
     _countries = countries;
     _trailer = trailer;
+    _casts = casts;
+    _comments = comments;
+    _rate = rate;
     _name = name;
     _synopsis = synopsis;
     _thumbnail = thumbnail;
     _poster = poster;
     _value = value;
     _releaseDate = releaseDate;
+    _isMovie = isMovie;
+    _myRate = myRate;
+    _isPremium = isPremium;
+    _movie = movie;
+    _series = series;
+    _totalComments = totalComments;
   }
 
   Media.fromJson(dynamic json) {
@@ -47,20 +70,48 @@ class Media {
     _synopsis = json['synopsis'];
     _thumbnail = json['thumbnail'];
     _poster = json['poster'];
+    _totalComments = json['total_comments'];
     _value = json['value'];
     _releaseDate = json['release_date'];
+    _isMovie = json['is_movie'];
+    _myRate = json['my_rate'];
+    _isPremium = json['is_premium'];
+    _movie = json['movie'] != null ? Movie.fromJson(json['movie']) : null;
+    _series = json['series'] != null ? Series.fromJson(json['series']) : null;
+    if (json['casts'] != null) {
+      _casts = [];
+      json['casts'].forEach((v) {
+        _casts?.add(Cast.fromJson(v));
+      });
+    }
+    if (json['comments'] != null) {
+      _comments = [];
+      json['comments'].forEach((v) {
+        _comments?.add(Comment.fromJson(v));
+      });
+    }
+    _rate = json['rate'];
   }
 
   int? _id;
   List<Genre>? _genres;
   List<Country>? _countries;
   MediaFile? _trailer;
+  List<Cast>? _casts;
+  List<Comment>? _comments;
+  double? _rate;
   String? _name;
   String? _synopsis;
   String? _thumbnail;
   String? _poster;
   String? _value;
   String? _releaseDate;
+  bool? _isMovie;
+  int? _myRate;
+  int? _totalComments;
+  bool? _isPremium;
+  Movie? _movie;
+  Series? _series;
 
   int? get id => _id;
 
@@ -77,6 +128,24 @@ class Media {
   String? get thumbnail => _thumbnail;
 
   String? get poster => _poster;
+
+  bool? get isMovie => _isMovie;
+
+  int? get myRate => _myRate;
+
+  int? get totalComments => _totalComments;
+
+  bool? get isPremium => _isPremium;
+
+  Movie? get movie => _movie;
+
+  Series? get series => _series;
+
+  List<Cast>? get casts => _casts;
+
+  List<Comment>? get comments => _comments;
+
+  double? get rate => _rate;
 
   // String? get value => _value;
   MediaValue? get value {
@@ -104,31 +173,24 @@ class Media {
     return s;
   }
 
+  String get countriesName {
+    String s = "";
+    for (int i = 0; i < (countries?.length ?? 0); i++) {
+      if (i + 1 == (countries?.length ?? 0)) {
+        s += (countries![i].name ?? "");
+      } else {
+        s += "${countries![i].name ?? ""} | ";
+      }
+    }
+    return s;
+  }
+
   String? get yearReleaseDate {
     var d = DateTime.tryParse(releaseDate ?? "");
     if (d != null) {
       return d.year.toString();
     }
     return "";
-  }
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = _id;
-    if (_genres != null) {
-      map['genres'] = _genres?.map((v) => v.toJson()).toList();
-    }
-    if (_countries != null) {
-      map['countries'] = _countries?.map((v) => v.toJson()).toList();
-    }
-    map['trailer'] = _trailer?.toJson();
-    map['name'] = _name;
-    map['synopsis'] = _synopsis;
-    map['thumbnail'] = _thumbnail;
-    map['poster'] = _poster;
-    map['value'] = _value;
-    map['release_date'] = _releaseDate;
-    return map;
   }
 }
 

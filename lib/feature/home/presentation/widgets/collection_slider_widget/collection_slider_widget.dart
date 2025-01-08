@@ -4,8 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rokhshare/config/dependency_injection.dart';
 import 'package:rokhshare/feature/home/data/remote/model/collection.dart';
 import 'package:rokhshare/feature/home/data/remote/model/media.dart';
+import 'package:rokhshare/feature/media/presentation/bloc/media_cubit.dart';
+import 'package:rokhshare/feature/media/presentation/media_page.dart';
 import 'package:rokhshare/feature/media_items/presentation/bloc/media_items_cubit.dart';
 import 'package:rokhshare/feature/media_items/presentation/media_items_page.dart';
+import 'package:rokhshare/feature/user/presentation/bloc/auth_cubit.dart';
 import 'package:rokhshare/gen/assets.gen.dart';
 
 class CollectionSliderWidget extends StatelessWidget {
@@ -37,16 +40,23 @@ class CollectionSliderWidget extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => BlocProvider(
-                                      create: (context) => MediaItemsCubit(
-                                          repository: getIt.get()),
-                                      child: MediaItemsPage(
-                                          title: collection.name ?? "",
-                                          collectionId: collection.id),
-                                    )));
+                                builder: (_) => MultiBlocProvider(
+                                        providers: [
+                                          BlocProvider(
+                                            create: (context) =>
+                                                MediaItemsCubit(
+                                                    repository: getIt.get()),
+                                          ),
+                                          BlocProvider.value(
+                                              value: BlocProvider.of<AuthCubit>(
+                                                  context))
+                                        ],
+                                        child: MediaItemsPage(
+                                            title: collection.name ?? "",
+                                            collectionId: collection.id))));
                           },
                           child: Assets.icons.arrowLeftLinear
-                              .svg(color: Theme.of(context).iconTheme.color),
+                              .svg(colorFilter: ColorFilter.mode(Theme.of(context).iconTheme.color!, BlendMode.srcIn)),
                         )
                       ])),
               SizedBox(
@@ -87,6 +97,16 @@ class _MovieItemState extends State<MovieItem> {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4),
         child: GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => MultiBlocProvider(providers: [
+                      BlocProvider(
+                          create: (context) =>
+                              MediaCubit(repository: getIt.get())),
+                      BlocProvider.value(
+                          value: BlocProvider.of<AuthCubit>(context))
+                    ], child: MediaPage(mediaId: widget.media.id!))));
+          },
           onTapDown: (_) {
             _changeScaleDown();
           },

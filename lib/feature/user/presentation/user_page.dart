@@ -148,8 +148,8 @@ class _UserPageState extends State<UserPage>
                           padding: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
                               color: state.isPremium == true
-                                  ? Colors.green[100]?.withOpacity(0.9)
-                                  : Colors.red[100]?.withOpacity(0.9),
+                                  ? Colors.green[100]?.withAlpha((0.9 * 255).round())
+                                  : Colors.red[100]?.withAlpha((0.9 * 255).round()),
                               borderRadius: BorderRadius.circular(4)),
                           child: Text(
                             state.error != null

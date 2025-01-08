@@ -25,6 +25,7 @@ class LocalStorageService {
 
   Future<void> login(String accessToken, String refreshToken, bool isPremium,
       int? days, String email, String username) async {
+    _cache.clear();
     await _preferences.setBool(LocalStorageKey.isLogin.key, true);
     await _preferences.setString(
         LocalStorageKey.refreshToken.key, refreshToken);
@@ -38,6 +39,7 @@ class LocalStorageService {
   }
 
   Future<void> setPremium(int days) async {
+    _cache.clear();
     await _preferences.setBool(LocalStorageKey.isPremium.key, true);
     await _preferences.setInt(LocalStorageKey.days.key, days);
   }
@@ -54,7 +56,7 @@ class LocalStorageService {
     _cache.remove(LocalStorageKey.username.key);
     _cache.remove(LocalStorageKey.days.key);
     _cache.remove(LocalStorageKey.isPremium.key);
-    _cache[LocalStorageKey.isLogin.key] = false;
+    _cache.remove(LocalStorageKey.isLogin.key);
     await _preferences.remove(LocalStorageKey.accessToken.key);
     await _preferences.remove(LocalStorageKey.refreshToken.key);
     await _preferences.remove(LocalStorageKey.email.key);

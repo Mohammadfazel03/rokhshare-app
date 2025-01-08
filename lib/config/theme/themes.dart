@@ -30,6 +30,7 @@ class Themes {
         outlineVariant: Color(0xffc5c6d0),
         shadow: Color(0xff000000),
         scrim: Color(0xff000000),
+        onInverseSurface: Color(0xfff0f0f7),
         inverseSurface: Color(0xff2f3036),
         surfaceDim: Color(0xffdad9e0),
         surfaceBright: Color(0xfffaf8ff),
@@ -39,6 +40,15 @@ class Themes {
         surfaceContainerHigh: Color(0xffe8e7ef),
         surfaceContainerHighest: Color(0xffe2e2e9),
       ),
+      tooltipTheme: TooltipThemeData(
+          textStyle: const TextStyle(
+              fontFamily: FontFamily.dana,
+              fontWeight: FontWeight.w500,
+              fontSize: 12,
+              color: Color(0xfff0f0f7)),
+          decoration: BoxDecoration(
+              color: const Color(0xff2f3036),
+              borderRadius: BorderRadius.circular(4))),
       textTheme: const TextTheme(
           displayLarge: TextStyle(
               fontFamily: FontFamily.dana,
@@ -131,6 +141,7 @@ class Themes {
         shadow: Color(0xff000000),
         scrim: Color(0xff000000),
         inverseSurface: Color(0xffe2e2e9),
+        onInverseSurface: Color(0xff2e3036),
         surfaceDim: Color(0xff121318),
         surfaceBright: Color(0xff38393f),
         surfaceContainerLowest: Color(0xff0d0e13),
@@ -139,6 +150,15 @@ class Themes {
         surfaceContainerHigh: Color(0xff282a2f),
         surfaceContainerHighest: Color(0xff33343a),
       ),
+      tooltipTheme: TooltipThemeData(
+          textStyle: const TextStyle(
+              fontFamily: FontFamily.dana,
+              fontWeight: FontWeight.w500,
+              fontSize: 12,
+              color: Color(0xff2e3036)),
+          decoration: BoxDecoration(
+              color: const Color(0xffe2e2e9),
+              borderRadius: BorderRadius.circular(4))),
       textTheme: const TextTheme(
           displayLarge: TextStyle(
               fontFamily: FontFamily.dana,

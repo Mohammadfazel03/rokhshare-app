@@ -9,13 +9,13 @@ class InteractiveCheckboxListTile extends StatefulWidget {
 
   final Color? activeColor;
 
-  final MaterialStateProperty<Color?>? fillColor;
+  final WidgetStatePropertyAll<Color?>? fillColor;
 
   final Color? checkColor;
 
   final Color? hoverColor;
 
-  final MaterialStateProperty<Color?>? overlayColor;
+  final WidgetStatePropertyAll<Color?>? overlayColor;
 
   final double? splashRadius;
 
