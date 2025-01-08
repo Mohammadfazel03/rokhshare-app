@@ -47,6 +47,7 @@ class _MediaPageState extends State<MediaPage> with TickerProviderStateMixin {
               controller: scrollController,
               slivers: [
                 MediaAppbarWidget(
+                  trailerUrl: state.data.trailer?.file ?? "",
                   mediaId: widget.mediaId,
                   name: state.data.name ?? "",
                   thumbnailUrl: state.data.thumbnail ?? "",

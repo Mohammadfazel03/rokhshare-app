@@ -13,11 +13,13 @@ import 'package:rokhshare/feature/login/presentation/login_page.dart';
 import 'package:rokhshare/feature/media/presentation/bloc/media_cubit.dart';
 import 'package:rokhshare/feature/plan/presentation/bloc/plan_cubit.dart';
 import 'package:rokhshare/feature/plan/presentation/plan_page.dart';
+import 'package:rokhshare/feature/trailer_player/presentation/trailer_player_page.dart';
 import 'package:rokhshare/feature/user/presentation/bloc/auth_cubit.dart';
 import 'package:rokhshare/gen/assets.gen.dart';
 
 class MediaAppbarWidget extends StatelessWidget {
   final String name;
+  final String trailerUrl;
   final int mediaId;
   final String thumbnailUrl;
   final String posterUrl;
@@ -31,7 +33,8 @@ class MediaAppbarWidget extends StatelessWidget {
       required this.posterUrl,
       required this.isPremium,
       required this.mediaValue,
-      required this.mediaId});
+      required this.mediaId,
+      required this.trailerUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -101,10 +104,7 @@ class MediaAppbarWidget extends StatelessWidget {
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: <Color>[
-                            Theme.of(context)
-                                .colorScheme
-                                .surface
-                                .withAlpha(0),
+                            Theme.of(context).colorScheme.surface.withAlpha(0),
                             Theme.of(context)
                                 .colorScheme
                                 .surface
@@ -339,7 +339,11 @@ class MediaAppbarWidget extends StatelessWidget {
                           }),
                       Expanded(
                           child: FilledButton.tonal(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (_) => TrailerPlayerPage(
+                                        trailer: trailerUrl)));
+                              },
                               style: ButtonStyle(
                                   padding: const WidgetStatePropertyAll(
                                       EdgeInsets.all(2)),
