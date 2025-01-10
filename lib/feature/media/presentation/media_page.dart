@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rokhshare/config/dependency_injection.dart';
+import 'package:rokhshare/feature/gallery/presentation/bloc/gallery_cubit.dart';
+import 'package:rokhshare/feature/gallery/presentation/gallery_page.dart';
 import 'package:rokhshare/feature/home/data/remote/model/media.dart';
 import 'package:rokhshare/feature/media/presentation/widgets/comments_items_widget/bloc/comments_items_cubit.dart';
 import 'package:rokhshare/feature/media/presentation/widgets/comments_items_widget/comments_items_widget.dart';
@@ -202,8 +204,7 @@ class _MediaPageState extends State<MediaPage> with TickerProviderStateMixin {
                 )),
                 const SliverToBoxAdapter(
                   child: Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                     child: Divider(),
                   ),
                 ),
@@ -316,7 +317,18 @@ class _MediaPageState extends State<MediaPage> with TickerProviderStateMixin {
                       MediaActionButtonWidget(
                         text: "گالری تصاویر",
                         iconAssets: Assets.icons.galleryBold.path,
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (_) => MultiBlocProvider(
+                                      providers: [
+                                        BlocProvider(
+                                            create: (context) => GalleryCubit(
+                                                repository: getIt.get()))
+                                      ],
+                                      child: GalleryPage(
+                                        media: widget.mediaId,
+                                      ))));
+                        },
                       ),
                       MediaActionButtonWidget(
                         text: "اشتراک گذاری",

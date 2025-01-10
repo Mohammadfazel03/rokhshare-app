@@ -4,6 +4,9 @@ import 'package:rokhshare/config/local_storage_service.dart';
 import 'package:rokhshare/feature/category/data/remote/category_api_service.dart';
 import 'package:rokhshare/feature/category/data/repositories/category_repository.dart';
 import 'package:rokhshare/feature/category/data/repositories/home_repository_impl.dart';
+import 'package:rokhshare/feature/gallery/data/remote/gallery_api_service.dart';
+import 'package:rokhshare/feature/gallery/data/repositories/gallery_repository.dart';
+import 'package:rokhshare/feature/gallery/data/repositories/gallery_repository_impl.dart';
 import 'package:rokhshare/feature/home/data/remote/home_api_service.dart';
 import 'package:rokhshare/feature/home/data/repositories/home_repository.dart';
 import 'package:rokhshare/feature/home/data/repositories/home_repository_impl.dart';
@@ -97,6 +100,11 @@ Future<void> setup() async {
       () => MediaApiService(dio: getIt.get()));
   getIt.registerLazySingleton<MediaRepository>(
       () => MediaRepositoryImpl(apiService: getIt.get()));
+
+  getIt.registerLazySingleton<GalleryApiService>(
+      () => GalleryApiService(dio: getIt.get()));
+  getIt.registerLazySingleton<GalleryRepository>(
+      () => GalleryRepositoryImpl(apiService: getIt.get()));
 
   // register bloc
   getIt.registerLazySingleton<GenreFilterSectionCubit>(
