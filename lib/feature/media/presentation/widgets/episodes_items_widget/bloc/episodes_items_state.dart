@@ -11,6 +11,7 @@ class EpisodesItemsState {
   final EpisodesItemsStatus status;
   final List<Episode> episodes;
   final Season? season;
+  final int mediaId;
   final int nextPage;
   final int lastPage;
   final int total;
@@ -23,9 +24,10 @@ class EpisodesItemsState {
       required this.nextPage,
       required this.lastPage,
       required this.total,
+      required this.mediaId,
       required this.error});
 
-  EpisodesItemsState.init(this.episodes, this.season, this.total)
+  EpisodesItemsState.init(this.episodes, this.season, this.total, this.mediaId)
       : status = EpisodesItemsStatus.initial,
         nextPage = 2,
         lastPage = (episodes.length == total) ? 1 : 2,
@@ -41,6 +43,7 @@ class EpisodesItemsState {
     ErrorEntity? error,
   }) {
     return EpisodesItemsState(
+      mediaId: mediaId,
       status: status ?? this.status,
       episodes: episodes ?? this.episodes,
       season: season ?? this.season,

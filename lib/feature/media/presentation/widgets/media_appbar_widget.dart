@@ -13,6 +13,8 @@ import 'package:rokhshare/feature/login/presentation/login_page.dart';
 import 'package:rokhshare/feature/media/presentation/bloc/media_cubit.dart';
 import 'package:rokhshare/feature/plan/presentation/bloc/plan_cubit.dart';
 import 'package:rokhshare/feature/plan/presentation/plan_page.dart';
+import 'package:rokhshare/feature/play/presentation/bloc/play_cubit.dart';
+import 'package:rokhshare/feature/play/presentation/player_page.dart';
 import 'package:rokhshare/feature/trailer_player/presentation/trailer_player_page.dart';
 import 'package:rokhshare/feature/user/presentation/bloc/auth_cubit.dart';
 import 'package:rokhshare/gen/assets.gen.dart';
@@ -21,6 +23,8 @@ class MediaAppbarWidget extends StatelessWidget {
   final String name;
   final String trailerUrl;
   final int mediaId;
+  final int? movieId;
+  final int? episodeId;
   final String thumbnailUrl;
   final String posterUrl;
   final bool isPremium;
@@ -34,7 +38,9 @@ class MediaAppbarWidget extends StatelessWidget {
       required this.isPremium,
       required this.mediaValue,
       required this.mediaId,
-      required this.trailerUrl});
+      required this.trailerUrl,
+      this.movieId,
+      this.episodeId});
 
   @override
   Widget build(BuildContext context) {
@@ -154,15 +160,39 @@ class MediaAppbarWidget extends StatelessWidget {
                                     children: [
                                       Expanded(
                                           child: FilledButton.icon(
-                                        onPressed: () {},
+                                        onPressed:
+                                            movieId != null || episodeId != null
+                                                ? () {
+                                                    Navigator.of(context).push(
+                                                        MaterialPageRoute(
+                                                            builder: (_) =>
+                                                                BlocProvider(
+                                                                  create: (context) =>
+                                                                      PlayCubit(
+                                                                          playRepository:
+                                                                              getIt.get()),
+                                                                  child: PlayerPage(
+                                                                      media:
+                                                                          mediaId,
+                                                                      episode:
+                                                                          episodeId,
+                                                                      movie:
+                                                                          movieId),
+                                                                )));
+                                                  }
+                                                : null,
                                         label: const Text('تماشا'),
                                         icon: Assets.icons.playBold.svg(
                                             height: 16,
                                             width: 16,
                                             colorFilter: ColorFilter.mode(
-                                                Theme.of(context)
-                                                    .colorScheme
-                                                    .onPrimary,
+                                                movieId != null ||
+                                                        episodeId != null
+                                                    ? Theme.of(context)
+                                                        .colorScheme
+                                                        .onPrimary
+                                                    : Theme.of(context)
+                                                        .disabledColor,
                                                 BlendMode.srcIn)),
                                         style: ButtonStyle(
                                             padding:
@@ -193,15 +223,39 @@ class MediaAppbarWidget extends StatelessWidget {
                                     children: [
                                       Expanded(
                                           child: FilledButton.icon(
-                                        onPressed: () {},
+                                        onPressed:
+                                            movieId != null || episodeId != null
+                                                ? () {
+                                                    Navigator.of(context).push(
+                                                        MaterialPageRoute(
+                                                            builder: (_) =>
+                                                                BlocProvider(
+                                                                  create: (context) =>
+                                                                      PlayCubit(
+                                                                          playRepository:
+                                                                              getIt.get()),
+                                                                  child: PlayerPage(
+                                                                      media:
+                                                                          mediaId,
+                                                                      episode:
+                                                                          episodeId,
+                                                                      movie:
+                                                                          movieId),
+                                                                )));
+                                                  }
+                                                : null,
                                         label: const Text('تماشا رایگان'),
                                         icon: Assets.icons.playBold.svg(
                                             height: 16,
                                             width: 16,
                                             colorFilter: ColorFilter.mode(
-                                                Theme.of(context)
-                                                    .colorScheme
-                                                    .onPrimary,
+                                                movieId != null ||
+                                                        episodeId != null
+                                                    ? Theme.of(context)
+                                                        .colorScheme
+                                                        .onPrimary
+                                                    : Theme.of(context)
+                                                        .disabledColor,
                                                 BlendMode.srcIn)),
                                         style: ButtonStyle(
                                             padding:

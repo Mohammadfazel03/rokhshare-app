@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rokhshare/config/dependency_injection.dart';
 import 'package:rokhshare/feature/media/presentation/widgets/episodes_items_widget/bloc/episodes_items_cubit.dart';
 import 'package:rokhshare/feature/media/presentation/widgets/season_widget/bloc/season_cubit.dart';
 import 'package:rokhshare/feature/media/presentation/widgets/season_widget/season_widget.dart';
+import 'package:rokhshare/feature/play/presentation/bloc/play_cubit.dart';
+import 'package:rokhshare/feature/play/presentation/player_page.dart';
 import 'package:rokhshare/utils/error_widget.dart';
 
 class EpisodesItemsWidget extends StatefulWidget {
@@ -108,7 +111,9 @@ class _EpisodesItemsWidgetState extends State<EpisodesItemsWidget> {
                         : 1),
                 itemBuilder: (BuildContext context, int index) {
                   if (index == state.episodes.length * 2 - 1) {
-                    if (state.lastPage >= state.nextPage && state.status != EpisodesItemsStatus.loading && state.status != EpisodesItemsStatus.error) {
+                    if (state.lastPage >= state.nextPage &&
+                        state.status != EpisodesItemsStatus.loading &&
+                        state.status != EpisodesItemsStatus.error) {
                       return Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -120,9 +125,13 @@ class _EpisodesItemsWidgetState extends State<EpisodesItemsWidget> {
                             child: InkWell(
                               borderRadius: BorderRadius.circular(32),
                               onTap: () {
-                                BlocProvider.of<EpisodesItemsCubit>(context).getEpisodes(
-                                  page: BlocProvider.of<EpisodesItemsCubit>(context).state.nextPage
-                                );
+                                BlocProvider.of<EpisodesItemsCubit>(context)
+                                    .getEpisodes(
+                                        page:
+                                            BlocProvider.of<EpisodesItemsCubit>(
+                                                    context)
+                                                .state
+                                                .nextPage);
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(4),
@@ -150,16 +159,14 @@ class _EpisodesItemsWidgetState extends State<EpisodesItemsWidget> {
                           const Expanded(child: Divider()),
                         ],
                       );
-                    }
-                    else if (state.status == EpisodesItemsStatus.loading) {
+                    } else if (state.status == EpisodesItemsStatus.loading) {
                       return const Center(
                         child: Padding(
                           padding: EdgeInsets.all(16),
                           child: CircularProgressIndicator.adaptive(),
                         ),
                       );
-                    }
-                    else {
+                    } else {
                       return CustomErrorWidget(
                           error: state.error!,
                           showIcon: false,
@@ -177,64 +184,77 @@ class _EpisodesItemsWidgetState extends State<EpisodesItemsWidget> {
                   }
                   if (index % 2 == 0) {
                     int i = (index / 2).floor();
-                    return Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(4),
-                          child: CachedNetworkImage(
-                              imageUrl: state.episodes[i].thumbnail ?? "",
-                              fit: BoxFit.cover,
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (_) => BlocProvider(
+                                  create: (context) =>
+                                      PlayCubit(playRepository: getIt.get()),
+                                  child: PlayerPage(
+                                      media: state.mediaId,
+                                      episode: state.episodes[i].id,
+                                      movie: null),
+                                )));
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(4),
+                            child: CachedNetworkImage(
+                                imageUrl: state.episodes[i].thumbnail ?? "",
+                                fit: BoxFit.cover,
+                                height: width / 12 * 5 * 11 / 16,
+                                width: width / 12 * 5),
+                          ),
+                          Expanded(
+                            child: SizedBox(
                               height: width / 12 * 5 * 11 / 16,
-                              width: width / 12 * 5),
-                        ),
-                        Expanded(
-                          child: SizedBox(
-                            height: width / 12 * 5 * 11 / 16,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                spacing: 4,
-                                children: [
-                                  Flexible(
-                                    child: Text(
-                                        "قسمت ${state.episodes[i].number ?? ''} ${state.episodes[i].name ?? ''}",
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelMedium
-                                            ?.copyWith(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onSurface)),
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                        state.episodes[i].synopsis ?? '',
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 3,
-                                        textAlign: TextAlign.justify,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall
-                                            ?.copyWith(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onSurfaceVariant)),
-                                  )
-                                ],
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 8),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  spacing: 4,
+                                  children: [
+                                    Flexible(
+                                      child: Text(
+                                          "قسمت ${state.episodes[i].number ?? ''} ${state.episodes[i].name ?? ''}",
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelMedium
+                                              ?.copyWith(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSurface)),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                          state.episodes[i].synopsis ?? '',
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 3,
+                                          textAlign: TextAlign.justify,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall
+                                              ?.copyWith(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSurfaceVariant)),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     );
                   } else {
                     return const Divider();

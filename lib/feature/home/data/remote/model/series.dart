@@ -88,6 +88,7 @@ class Episode {
   Episode({
     String? name,
     int? number,
+    int? id,
     MediaFile? video,
     int? time,
     String? synopsis,
@@ -99,6 +100,7 @@ class Episode {
     _number = number;
     _video = video;
     _time = time;
+    _id = id;
     _synopsis = synopsis;
     _thumbnail = thumbnail;
     _poster = poster;
@@ -111,6 +113,7 @@ class Episode {
     _video = json['video'] != null ? MediaFile.fromJson(json['video']) : null;
     _time = json['time'];
     _synopsis = json['synopsis'];
+    _id = json['id'];
     _thumbnail = json['thumbnail'];
     _poster = json['poster'];
     _publicationDate = json['publication_date'];
@@ -124,6 +127,7 @@ class Episode {
   String? _thumbnail;
   String? _poster;
   String? _publicationDate;
+  int? _id;
 
   String? get name => _name;
 
@@ -140,4 +144,6 @@ class Episode {
   String? get poster => _poster;
 
   String? get publicationDate => _publicationDate;
+
+  int? get id => _id;
 }

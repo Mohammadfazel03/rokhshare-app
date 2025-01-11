@@ -13,9 +13,10 @@ class EpisodesItemsCubit extends Cubit<EpisodesItemsState> {
   EpisodesItemsCubit(
       {required this.repository,
       required int total,
+      required int mediaId,
       required List<Episode> episodes,
       required Season? season})
-      : super(EpisodesItemsState.init(episodes, season, total));
+      : super(EpisodesItemsState.init(episodes, season, total, mediaId));
 
   Future<void> getEpisodes({int page = 1, bool retry = false}) async {
     if ((state.nextPage > state.lastPage) ||

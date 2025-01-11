@@ -22,6 +22,9 @@ import 'package:rokhshare/feature/media_items/data/repositories/media_items_repo
 import 'package:rokhshare/feature/plan/data/remote/plan_api_service.dart';
 import 'package:rokhshare/feature/plan/data/repositories/plan_repository.dart';
 import 'package:rokhshare/feature/plan/data/repositories/plan_repository_impl.dart';
+import 'package:rokhshare/feature/play/data/remote/play_api_service.dart';
+import 'package:rokhshare/feature/play/data/repositories/play_repository.dart';
+import 'package:rokhshare/feature/play/data/repositories/play_repository_impl.dart';
 import 'package:rokhshare/feature/search/data/remote/search_api_service.dart';
 import 'package:rokhshare/feature/search/data/repositories/search_repository.dart';
 import 'package:rokhshare/feature/search/data/repositories/search_repository_impl.dart';
@@ -105,6 +108,11 @@ Future<void> setup() async {
       () => GalleryApiService(dio: getIt.get()));
   getIt.registerLazySingleton<GalleryRepository>(
       () => GalleryRepositoryImpl(apiService: getIt.get()));
+
+  getIt.registerLazySingleton<PlayApiService>(
+      () => PlayApiService(dio: getIt.get()));
+  getIt.registerLazySingleton<PlayRepository>(
+      () => PlayRepositoryImpl(apiService: getIt.get()));
 
   // register bloc
   getIt.registerLazySingleton<GenreFilterSectionCubit>(

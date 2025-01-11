@@ -56,6 +56,9 @@ class _MediaPageState extends State<MediaPage> with TickerProviderStateMixin {
                   posterUrl: state.data.poster ?? "",
                   isPremium: state.data.isPremium ?? false,
                   mediaValue: state.data.value ?? MediaValue.subscription,
+                  movieId: state.data.movie?.id,
+                  episodeId: state.data.series?.seasons?.firstOrNull?.episodes
+                      ?.firstOrNull?.id,
                 ),
                 const SliverToBoxAdapter(
                   child: Padding(
@@ -346,6 +349,7 @@ class _MediaPageState extends State<MediaPage> with TickerProviderStateMixin {
                   MultiBlocProvider(providers: [
                     BlocProvider(
                         create: (context) => EpisodesItemsCubit(
+                            mediaId: state.data.id!,
                             repository: getIt.get(),
                             total: (state.data.series?.seasons != null &&
                                     state.data.series!.seasons!.isNotEmpty)
