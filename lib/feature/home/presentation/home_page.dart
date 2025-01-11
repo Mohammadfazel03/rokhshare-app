@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    var width = MediaQuery.sizeOf(context).width;
+    var topPadding = MediaQuery.viewPaddingOf(context).top;
     return Scaffold(
       body: BlocBuilder<HomeCubit, HomeState>(
         buildWhen: (p, c) {
@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage>
               controller: _scrollController,
               slivers: [
                 SliverPadding(
-                    padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
+                    padding: EdgeInsets.fromLTRB(0, 16 + topPadding, 0, 16),
                     sliver: SliverToBoxAdapter(
                         child: HomeSlider(sliders: state.slides))),
                 BlocBuilder<HomeCubit, HomeState>(
@@ -101,6 +101,7 @@ class _HomePageState extends State<HomePage>
                     );
                   },
                 ),
+                const SliverPadding(padding: EdgeInsets.only(bottom: 54))
               ],
             );
           } else if (state.status == HomeStatus.error) {

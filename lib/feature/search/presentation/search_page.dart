@@ -62,94 +62,97 @@ class _SearchPageState extends State<SearchPage>
   Widget build(BuildContext context) {
     super.build(context);
     var width = MediaQuery.sizeOf(context).width;
-    return Scaffold(
-        body: CustomScrollView(
-      physics: const AlwaysScrollableScrollPhysics(),
-      controller: _scrollController,
-      slivers: [
-        SliverPersistentHeader(
-            pinned: true,
-            floating: true,
-            delegate: SearchHeader(controller: _searchController)),
-        BlocBuilder<SearchCubit, SearchState>(builder: (context, state) {
-          if (state.status == SearchStatus.initial) {
-            return const SliverToBoxAdapter(child: SizedBox.shrink());
-          } else if (state.status == SearchStatus.loading &&
-              state.media.isEmpty) {
-            return const SliverFillRemaining(
+    return SafeArea(
+      bottom: false,
+      child: Scaffold(
+          body: CustomScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        controller: _scrollController,
+        slivers: [
+          SliverPersistentHeader(
+              pinned: true,
+              floating: true,
+              delegate: SearchHeader(controller: _searchController)),
+          BlocBuilder<SearchCubit, SearchState>(builder: (context, state) {
+            if (state.status == SearchStatus.initial) {
+              return const SliverToBoxAdapter(child: SizedBox.shrink());
+            } else if (state.status == SearchStatus.loading &&
+                state.media.isEmpty) {
+              return const SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Center(child: CircularProgressIndicator.adaptive()));
+            } else if (state.status == SearchStatus.error &&
+                state.media.isEmpty) {
+              return SliverFillRemaining(
                 hasScrollBody: false,
-                child: Center(child: CircularProgressIndicator.adaptive()));
-          } else if (state.status == SearchStatus.error &&
-              state.media.isEmpty) {
-            return SliverFillRemaining(
-              hasScrollBody: false,
-              child: CustomErrorWidget(
-                  error: state.error!,
-                  showIcon: true,
-                  showTitle: true,
-                  onRetry: () {
-                    BlocProvider.of<SearchCubit>(context).search(retry: true);
+                child: CustomErrorWidget(
+                    error: state.error!,
+                    showIcon: true,
+                    showTitle: true,
+                    onRetry: () {
+                      BlocProvider.of<SearchCubit>(context).search(retry: true);
+                    }),
+              );
+            } else if (state.status == SearchStatus.success &&
+                state.media.isEmpty) {
+              return const SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Center(child: Text("موردی یافت نشد!")));
+            }
+
+            var titleTextHeight =
+                _textSize("text", Theme.of(context).textTheme.labelLarge).height;
+            var subtitleTextHeight =
+                _textSize("text", Theme.of(context).textTheme.labelSmall).height;
+
+            var mainWidth = (width - 16 - ((width / 200).floor() * 8)) /
+                (width / 200).floor();
+            var mainHeight =
+                (mainWidth * 3 / 2) + 16 + titleTextHeight + subtitleTextHeight;
+
+            return SliverPadding(
+              padding: const EdgeInsets.fromLTRB(8, 8, 8, 8 + 70),
+              sliver: SliverGrid.builder(
+                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 200,
+                    mainAxisSpacing: 0,
+                    crossAxisSpacing: 0,
+                    childAspectRatio: mainWidth / mainHeight,
+                  ),
+                  itemCount: state.status == SearchStatus.success
+                      ? state.media.length
+                      : state.media.length + 1,
+                  itemBuilder: (context, index) {
+                    if (index == state.media.length) {
+                      if (state.status == SearchStatus.loading) {
+                        return const Center(
+                          child: Padding(
+                            padding: EdgeInsets.all(16),
+                            child: CircularProgressIndicator.adaptive(),
+                          ),
+                        );
+                      } else {
+                        return CustomErrorWidget(
+                            error: state.error!,
+                            showIcon: false,
+                            showMessage: true,
+                            showTitle: false,
+                            onRetry: () {
+                              int page = BlocProvider.of<SearchCubit>(context)
+                                  .state
+                                  .nextPage;
+                              BlocProvider.of<SearchCubit>(context)
+                                  .search(page: page, retry: true);
+                            });
+                      }
+                    }
+                    return MovieItem(media: state.media[index]);
                   }),
             );
-          } else if (state.status == SearchStatus.success &&
-              state.media.isEmpty) {
-            return const SliverFillRemaining(
-                hasScrollBody: false,
-                child: Center(child: Text("موردی یافت نشد!")));
-          }
-
-          var titleTextHeight =
-              _textSize("text", Theme.of(context).textTheme.labelLarge).height;
-          var subtitleTextHeight =
-              _textSize("text", Theme.of(context).textTheme.labelSmall).height;
-
-          var mainWidth = (width - 16 - ((width / 200).floor() * 8)) /
-              (width / 200).floor();
-          var mainHeight =
-              (mainWidth * 3 / 2) + 16 + titleTextHeight + subtitleTextHeight;
-
-          return SliverPadding(
-            padding: const EdgeInsets.all(8),
-            sliver: SliverGrid.builder(
-                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 200,
-                  mainAxisSpacing: 0,
-                  crossAxisSpacing: 0,
-                  childAspectRatio: mainWidth / mainHeight,
-                ),
-                itemCount: state.status == SearchStatus.success
-                    ? state.media.length
-                    : state.media.length + 1,
-                itemBuilder: (context, index) {
-                  if (index == state.media.length) {
-                    if (state.status == SearchStatus.loading) {
-                      return const Center(
-                        child: Padding(
-                          padding: EdgeInsets.all(16),
-                          child: CircularProgressIndicator.adaptive(),
-                        ),
-                      );
-                    } else {
-                      return CustomErrorWidget(
-                          error: state.error!,
-                          showIcon: false,
-                          showMessage: true,
-                          showTitle: false,
-                          onRetry: () {
-                            int page = BlocProvider.of<SearchCubit>(context)
-                                .state
-                                .nextPage;
-                            BlocProvider.of<SearchCubit>(context)
-                                .search(page: page, retry: true);
-                          });
-                    }
-                  }
-                  return MovieItem(media: state.media[index]);
-                }),
-          );
-        })
-      ],
-    ));
+          })
+        ],
+      )),
+    );
   }
 
   @override

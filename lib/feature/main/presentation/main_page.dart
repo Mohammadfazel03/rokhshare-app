@@ -46,20 +46,18 @@ class _MainPageState extends State<MainPage> {
               create: (context) => AuthCubit(authRepository: getIt.get(), localStorageService: getIt.get())),
 
         ],
-        child: SafeArea(
-          child: Scaffold(
-            extendBody: true,
-            bottomNavigationBar: MainBottomNavigationBar(controller: _controller),
-            body: PageView(
-              controller: _controller,
-              physics: const NeverScrollableScrollPhysics(),
-              children: const [
-                HomePage(),
-                SearchPage(),
-                CategoryPage(),
-                UserPage()
-              ],
-            ),
+        child: Scaffold(
+          extendBody: true,
+          bottomNavigationBar: MainBottomNavigationBar(controller: _controller),
+          body: PageView(
+            controller: _controller,
+            physics: const NeverScrollableScrollPhysics(),
+            children: const [
+              HomePage(),
+              SearchPage(),
+              CategoryPage(),
+              UserPage()
+            ],
           ),
         ));
   }

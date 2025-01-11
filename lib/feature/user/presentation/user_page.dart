@@ -24,6 +24,7 @@ class _UserPageState extends State<UserPage>
   Widget build(BuildContext context) {
     super.build(context);
     var width = MediaQuery.sizeOf(context).width;
+    var topPadding = MediaQuery.viewPaddingOf(context).top;
     return Scaffold(
         body: SingleChildScrollView(
       child: Column(
@@ -31,6 +32,7 @@ class _UserPageState extends State<UserPage>
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          SizedBox(height: topPadding),
           BlocBuilder<AuthCubit, AuthState>(
             builder: (context, state) {
               if (state.isLogin == false) {
@@ -316,7 +318,8 @@ class _UserPageState extends State<UserPage>
             } else {
               return const SizedBox.shrink();
             }
-          })
+          }),
+          const SizedBox(height: 70),
         ],
       ),
     ));
