@@ -44,12 +44,9 @@ This app connects to the Rokhshare Django backend via RESTful APIs and allows us
 
 ## 📱 Mobile App UI Showcase
 <p align="center">
-<img src="screenshots/10
-.jpg" alt="Home Screen" width="200"/>
-<img src="screenshots/6
-.jpg" alt="Movie Details" width="200"/>
-<img src="screenshots/1
-.jpg" alt="Movie Details" width="200"/>
+<img src="screenshots/10.jpg" alt="Home Screen" width="200">
+<img src="screenshots/6.jpg" alt="Movie Details" width="200"/>
+<img src="screenshots/1.jpg" alt="Movie Details" width="200"/>
 <img src="screenshots/7.jpg" alt="Search Screen" width="200"/>
  <img src="screenshots/2.jpg" alt="Filter Screen" width="200"/>
 <img src="screenshots/8.jpg" alt="Search Screen" width="200"/>
